@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj": {}
+  },
+  "projects": {
+    "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
+        "projectName": "LFM.Authorization.Repository",
+        "projectPath": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
+        "packagesPath": "/Users/tbrand/.nuget/packages/",
+        "outputPath": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tbrand/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dttnl-tax-ita/f643c29a-1d30-4144-96b1-6ff2680d590c/_packaging/ETP/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
