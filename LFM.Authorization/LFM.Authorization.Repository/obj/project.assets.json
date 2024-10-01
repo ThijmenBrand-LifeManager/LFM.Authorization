@@ -955,11 +955,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
+      "projectUniqueName": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
       "projectName": "LFM.Authorization.Repository",
-      "projectPath": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
+      "projectPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj",
       "packagesPath": "/Users/tbrand/.nuget/packages/",
-      "outputPath": "/Users/tbrand/Documents/Fontys/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/",
+      "outputPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/tbrand/.nuget/NuGet/NuGet.Config"

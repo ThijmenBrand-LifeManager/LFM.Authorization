@@ -7,7 +7,7 @@ namespace LFM.Authorization.Endpoints;
 public class Users(IHttpContextAccessor httpContextAccessor) : ControllerBase
 {
     [HttpGet("me")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize]
     public async Task<IActionResult> Me()
     {
         var userId = httpContextAccessor.HttpContext.User.Identity.Name;

@@ -25,6 +25,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+bin/
+obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -603,3 +605,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,rider,csharp
+/LFM.Authorization.Repository/bin/
+/LFM.Authorization.Repository/obj/
