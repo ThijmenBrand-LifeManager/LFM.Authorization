@@ -1,24 +1,19 @@
-using System.Security.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Authorization;
 
 namespace LFM.Authorization.AspNetCore;
 
-public class LfmAuthorizeAttribute() : TypeFilterAttribute(typeof(LfmAuthorizationFilter));
-
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-public class LfmAuthorizationFilter : Attribute, IAuthorizationFilter
+public class LfmAuthorizeRequirement : IAuthorizationRequirement
 {
-    public void OnAuthorization(AuthorizationFilterContext context)
+    private readonly List<ScopedPermissions> _scopedPermissions = new();
+
+    public LfmAuthorizeRequirement() : this(new List<string>().ToArray(), new List<string>().ToArray()) { }
+    
+    public LfmAuthorizeRequirement(string[] permissions, string[] scopeMask)
     {
-        var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
-        if (allowAnonymous)
-            return;
-
-        var isAuthenticated = context.HttpContext.User.Identity.IsAuthenticated;
-        if (!isAuthenticated) throw new AuthenticationException("User is not authenticated");
-
-        return;
+        if(permissions.Length != scopeMask.Length)
+            throw new ArgumentException("Permissions and scope mask must have the same length.");
+        
+        for(var i = 0; i < permissions.Length; i++)
+            _scopedPermissions.Add(new ScopedPermissions(permissions[i], scopeMask[i]));
     }
 }

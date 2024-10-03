@@ -7,6 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="9.0.0-rc.1.24452.1" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\LFM.Authorization.Api\LFM.Authorization.Api.csproj" />
     </ItemGroup>
 
