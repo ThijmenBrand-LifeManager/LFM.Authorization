@@ -13,8 +13,6 @@ if (enableSwagger)
     builder.Services.AddSwagger();
 }
 
-builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
-builder.Services.AddAuthorization();
 builder.Services.AddLfmAuthorization(builder.Configuration);
 
 builder.Services.AddIdentityCore<IdentityUser>()
