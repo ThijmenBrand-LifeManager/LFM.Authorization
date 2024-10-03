@@ -8,10 +8,11 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="9.0.0-rc.1.24452.1" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LFM.Authorization.Api\LFM.Authorization.Api.csproj" />
+      <ProjectReference Include="..\LFM.Authorization.Core\LFM.Authorization.Core.csproj" />
     </ItemGroup>
 
 </Project>
