@@ -1,6 +1,7 @@
 using LFM.Authorization.AspNetCore;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);

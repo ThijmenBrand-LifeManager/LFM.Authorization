@@ -11,6 +11,7 @@ public static class AspNetCoreModule
     {
         services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
         services.AddAuthorization();
+
         services.AddSingleton<IAuthorizationHandler, LfmAuthorizationHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, LfmAuthorizationPolicyProvider>();
 
