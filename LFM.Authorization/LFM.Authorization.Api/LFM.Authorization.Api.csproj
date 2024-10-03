@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LFM.Authorization.AspNetCore\LFM.Authorization.AspNetCore.csproj" />
       <ProjectReference Include="..\LFM.Authorization.Repository\LFM.Authorization.Repository.csproj" />
     </ItemGroup>
 

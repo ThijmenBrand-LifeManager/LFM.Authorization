@@ -1,3 +1,4 @@
+using LFM.Authorization.AspNetCore;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -12,8 +13,9 @@ if (enableSwagger)
     builder.Services.AddSwagger();
 }
 
-builder.Services.AddAuthorization();
 builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddAuthorization();
+builder.Services.AddLfmAuthorization(builder.Configuration);
 
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddEntityFrameworkStores<DatabaseContext>()

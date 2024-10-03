@@ -1,3 +1,4 @@
+using LFM.Authorization.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace LFM.Authorization.Endpoints;
 public class Users(IHttpContextAccessor httpContextAccessor) : ControllerBase
 {
     [HttpGet("me")]
-    [Authorize]
+    [LfmAuthorize(["user.read"], ["/profile"])]
     public async Task<IActionResult> Me()
     {
         var userId = httpContextAccessor.HttpContext.User.Identity.Name;
