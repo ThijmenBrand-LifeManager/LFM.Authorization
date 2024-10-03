@@ -6,6 +6,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFM.Authorization.Core", "L
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFM.Authorization.Repository", "LFM.Authorization.Repository\LFM.Authorization.Repository.csproj", "{8B7D1B79-DC20-4B7E-89CC-2BEB97098810}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{95C24031-B601-4144-876B-8713D4CB0BA9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{1B9364F4-6DAA-41B4-AFC5-80A870405575}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LFM.Authentication.AspNetCore", "LFM.Authentication.AspNetCore\LFM.Authentication.AspNetCore.csproj", "{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +30,15 @@ Global
 		{8B7D1B79-DC20-4B7E-89CC-2BEB97098810}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B7D1B79-DC20-4B7E-89CC-2BEB97098810}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B7D1B79-DC20-4B7E-89CC-2BEB97098810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C2847D4-62A8-41CE-A3F7-E5DF6B07AB7B} = {95C24031-B601-4144-876B-8713D4CB0BA9}
+		{2E5A3E1A-365D-4974-8897-33D9A35ADBC8} = {95C24031-B601-4144-876B-8713D4CB0BA9}
+		{8B7D1B79-DC20-4B7E-89CC-2BEB97098810} = {95C24031-B601-4144-876B-8713D4CB0BA9}
+		{98D36F60-0DC9-4E95-987A-C2F7B2F5A92D} = {1B9364F4-6DAA-41B4-AFC5-80A870405575}
 	EndGlobalSection
 EndGlobal

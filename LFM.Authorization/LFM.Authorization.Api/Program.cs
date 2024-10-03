@@ -9,7 +9,7 @@ builder.Services.AddEndpointsApiExplorer();
 var enableSwagger = builder.Configuration.GetValue<bool>("OpenApi:ShowDocument");
 if (enableSwagger)
 {
-    builder.Services.AddSwaggerGen();
+    builder.Services.AddSwagger();
 }
 
 builder.Services.AddAuthorization();
