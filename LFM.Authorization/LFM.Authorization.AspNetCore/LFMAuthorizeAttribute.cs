@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace LFM.Authentication.AspNetCore;
+namespace LFM.Authorization.AspNetCore;
 
 public class LfmAuthorizeAttribute() : TypeFilterAttribute(typeof(LfmAuthorizationFilter));
 

@@ -21,6 +21,7 @@
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ThijmenBrand/407d6065-8587-4ac8-ae70-2cd6113344f6/_packaging/Lfm/nuget/v3/index.json": {},
           "https://pkgs.dev.azure.com/dttnl-tax-ita/f643c29a-1d30-4144-96b1-6ff2680d590c/_packaging/ETP/nuget/v3/index.json": {}
         },
         "frameworks": {
