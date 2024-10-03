@@ -52,9 +52,3 @@ jobs:
           command: push
           searchPatternPush: "$(Build.ArtifactStagingDirectory)/*.nupkg;!$(Build.ArtifactStagingDirectory)/*.Tests.nupkg"
           publishVstsFeed: "407d6065-8587-4ac8-ae70-2cd6113344f6/33514246-42b5-4e00-ae05-c44e6f65cb0e"
-
-      - task: PublishPipelineArtifact@1
-        inputs:
-          targetPath: "$(build.artifactstagingdirectory)/build"
-          artifact: "drop"
-          publishLocation: "pipeline"
