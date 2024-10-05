@@ -18,7 +18,12 @@ public class LfmAuthorizeAttribute: Attribute, IAuthorizeData
             _scopedPermissions.Add(new ScopedPermissions(permissions[i], scopeMask[i]));
     }
     
-    public string Policy { get; set; }
+    public string Policy
+    {
+        get => _scopedPermissions.ToPolicy();
+        set { }
+    }
+    
     public string Roles { get; set; }
     public string AuthenticationSchemes { get; set; }
 }

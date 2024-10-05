@@ -24,3 +24,6 @@
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/refint/LFM.Authorization.Repository.dll
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/LFM.Authorization.Repository.pdb
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/ref/LFM.Authorization.Repository.dll
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.Core.dll
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.Core.pdb
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/LFM.Authorization.Repository.csproj.CopyComplete

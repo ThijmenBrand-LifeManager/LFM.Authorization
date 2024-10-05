@@ -1,10 +1,11 @@
+using LFM.Authorization.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace LFM.Authorization.Repository;
 
-public class DatabaseContext(DbContextOptions options) : IdentityDbContext(options)
+public class DatabaseContext(DbContextOptions options) : IdentityDbContext<LfmUser>(options)
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

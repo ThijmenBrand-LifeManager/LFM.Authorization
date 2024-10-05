@@ -1,7 +1,8 @@
 using LFM.Authorization.AspNetCore;
+using LFM.Authorization.Core;
+using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,18 +14,23 @@ if (enableSwagger)
 {
     builder.Services.AddSwagger();
 }
+builder.Services.AddCoreModule(builder.Configuration);
+builder.Services.AddRepositoryModule(builder.Configuration);
+
+builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
+    {
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequiredLength = 12;
+    })
+    .AddEntityFrameworkStores<DatabaseContext>();
 
 builder.Services.AddLfmAuthorization(builder.Configuration);
 
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddEntityFrameworkStores<DatabaseContext>()
-    .AddApiEndpoints();
-
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddRepositoryModule(builder.Configuration);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -36,12 +42,11 @@ if (enableSwagger)
     app.ApplyMigrations();
 }
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseHttpsRedirection();
 
 app.MapControllers();
-app.MapIdentityApi<IdentityUser>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

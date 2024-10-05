@@ -1,19 +1,19 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace LFM.Authorization.AspNetCore;
 
 public class LfmAuthorizationHandler : AuthorizationHandler<LfmAuthorizationRequirement>
 {
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, LfmAuthorizationRequirement requirement)
+    protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, LfmAuthorizationRequirement requirement)
     {
-        var user = context.User.Identity.IsAuthenticated;
-        if (!user)
+        var user = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (user == null)
         {
-            context.Fail();
-            return Task.CompletedTask;
+            return;
         }
         
         context.Succeed(requirement);
-        return Task.CompletedTask;
     }
 }
