@@ -15,7 +15,7 @@ public static class AspNetCoreModule
     public static IServiceCollection AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AuthorizationDbContext>(options =>
-            options.UseNpgsql(configuration.GetSection("Postgres").GetValue<string>("ConnectionString")));
+            options.UseNpgsql(configuration.GetSection("Authorization").GetValue<string>("ConnectionString")));
         
         services.AddTransient<IValidatePermissions, ValidatePermissions>();
         
