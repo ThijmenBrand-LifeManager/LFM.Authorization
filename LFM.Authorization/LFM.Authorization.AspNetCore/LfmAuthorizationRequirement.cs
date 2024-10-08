@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LFM.Authorization.AspNetCore;
 
-public class LfmAuthorizationRequirement(List<ScopedPermissions> permissions) : IAuthorizationRequirement
+public class LfmAuthorizationRequirement(List<ScopedPermission> permissions) : IAuthorizationRequirement
 {
-    private List<ScopedPermissions> Permissions { get; } = permissions;
+    public List<ScopedPermission> Permissions { get; init; } = permissions;
 }

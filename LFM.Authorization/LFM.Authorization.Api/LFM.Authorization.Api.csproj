@@ -9,6 +9,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AuthPermissions.AspNetCore" Version="8.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.10.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+        <PackageReference Include="MediatR" Version="12.4.1" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
@@ -23,6 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LFM.Authorization.Application\LFM.Authorization.Application.csproj" />
       <ProjectReference Include="..\LFM.Authorization.AspNetCore\LFM.Authorization.AspNetCore.csproj" />
       <ProjectReference Include="..\LFM.Authorization.Repository\LFM.Authorization.Repository.csproj" />
     </ItemGroup>

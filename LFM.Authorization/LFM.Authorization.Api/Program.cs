@@ -1,3 +1,5 @@
+using FluentValidation;
+using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;
 using LFM.Authorization.Core;
 using LFM.Authorization.Core.Models;
@@ -14,8 +16,10 @@ if (enableSwagger)
 {
     builder.Services.AddSwagger();
 }
+
 builder.Services.AddCoreModule(builder.Configuration);
 builder.Services.AddRepositoryModule(builder.Configuration);
+builder.Services.AddApplicationModule(builder.Configuration);
 
 builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
     {
@@ -28,6 +32,8 @@ builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<DatabaseContext>();
 
 builder.Services.AddLfmAuthorization(builder.Configuration);
+
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();

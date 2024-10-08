@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LFM.Authorization.Core.AuthHelpers;
+namespace LFM.Authorization.Application.AuthHelpers;
 
 public sealed class TokenService : ITokenService
 {

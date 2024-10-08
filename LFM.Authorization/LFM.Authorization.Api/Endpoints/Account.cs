@@ -1,4 +1,4 @@
-using LFM.Authorization.Core.AuthHelpers;
+using LFM.Authorization.Application.AuthHelpers;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Endpoints.Dto;
 using Microsoft.AspNetCore.Identity;

@@ -607,3 +607,4 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,rider,csharp
 /LFM.Authorization.Repository/bin/
 /LFM.Authorization.Repository/obj/
+/LFM.Authorization.Repository/Migrations/

@@ -6,18 +6,18 @@ public static class PolicyHelper
 {
     private const string NoRequirements = "NoRequirements";
 
-    public static string ToPolicy(this List<ScopedPermissions> scopedPermissionsList)
+    public static string ToPolicy(this List<ScopedPermission> scopedPermissionsList)
     {
         if (!scopedPermissionsList.Any()) return NoRequirements;
         return JsonConvert.SerializeObject(scopedPermissionsList);
     }
 
-    public static List<ScopedPermissions>? ToScopedPermissions(this string policy)
+    public static List<ScopedPermission>? ToScopedPermissions(this string policy)
     {
         try
         {
-            if (policy == NoRequirements) return new List<ScopedPermissions>();
-            return JsonConvert.DeserializeObject<List<ScopedPermissions>>(policy);
+            if (policy == NoRequirements) return new List<ScopedPermission>();
+            return JsonConvert.DeserializeObject<List<ScopedPermission>>(policy);
         }
         catch (Exception e)
         {

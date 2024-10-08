@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LFM.Authorization.Repository")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c5dbc4c1059317ec1b8b03b3460ac0798b1a757")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+167777649711ac8ff973311ca6490045d8658705")]
 [assembly: System.Reflection.AssemblyProductAttribute("LFM.Authorization.Repository")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LFM.Authorization.Repository")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

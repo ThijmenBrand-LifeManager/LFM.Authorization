@@ -1,7 +1,9 @@
 using System.Text;
+using LFM.Authorization.AspNetCore.Database;
+using LFM.Authorization.AspNetCore.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -12,6 +14,11 @@ public static class AspNetCoreModule
 {
     public static IServiceCollection AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddDbContext<AuthorizationDbContext>(options =>
+            options.UseNpgsql(configuration.GetSection("Postgres").GetValue<string>("ConnectionString")));
+        
+        services.AddTransient<IValidatePermissions, ValidatePermissions>();
+        
         services.AddAuthentication(options =>
         {
             options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
