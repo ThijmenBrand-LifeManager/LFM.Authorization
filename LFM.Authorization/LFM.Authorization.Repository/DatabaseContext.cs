@@ -1,3 +1,4 @@
+using LFM.Authorization.AspNetCore.Models;
 using LFM.Authorization.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

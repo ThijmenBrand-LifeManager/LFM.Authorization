@@ -4,6 +4,103 @@
     "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/LFM.Authorization.Repository.csproj": {}
   },
   "projects": {
+    "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj",
+        "projectName": "LFM.Authorization.AspNetCore",
+        "projectPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj",
+        "packagesPath": "/Users/tbrand/.nuget/packages/",
+        "outputPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tbrand/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/ThijmenBrand/407d6065-8587-4ac8-ae70-2cd6113344f6/_packaging/Lfm/nuget/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dttnl-tax-ita/f643c29a-1d30-4144-96b1-6ff2680d590c/_packaging/ETP/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.5.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Microsoft.Extensions.Configuration.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Core/LFM.Authorization.Core.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -115,6 +212,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj": {
+                "projectPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj"
+              },
               "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Core/LFM.Authorization.Core.csproj": {
                 "projectPath": "/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Core/LFM.Authorization.Core.csproj"
               }

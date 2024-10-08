@@ -1,5 +1,5 @@
 using System.Data.Entity.Infrastructure;
-using LFM.Authorization.Core.Models;
+using LFM.Authorization.AspNetCore.Models;
 using Microsoft.EntityFrameworkCore;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 

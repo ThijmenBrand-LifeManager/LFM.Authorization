@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LFM.Authorization.AspNetCore\LFM.Authorization.AspNetCore.csproj" />
       <ProjectReference Include="..\LFM.Authorization.Core\LFM.Authorization.Core.csproj" />
     </ItemGroup>
 

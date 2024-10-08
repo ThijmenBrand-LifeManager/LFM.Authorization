@@ -27,3 +27,7 @@
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.Core.dll
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.Core.pdb
 /Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/LFM.Authorization.Repository.csproj.CopyComplete
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.Repository.runtimeconfig.json
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.AspNetCore.dll
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/bin/Debug/net8.0/LFM.Authorization.AspNetCore.pdb
+/Users/tbrand/Documents/Fontys/Personal-Project/LFM.Authorization/LFM.Authorization/LFM.Authorization.Repository/obj/Debug/net8.0/LFM.Authorization.Repository.genruntimeconfig.cache

@@ -19,8 +19,4 @@
       <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.8" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\LFM.Authorization.Core\LFM.Authorization.Core.csproj" />
-    </ItemGroup>
-
 </Project>

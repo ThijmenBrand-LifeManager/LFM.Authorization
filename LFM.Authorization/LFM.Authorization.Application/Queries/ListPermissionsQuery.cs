@@ -1,3 +1,4 @@
+using LFM.Authorization.AspNetCore.Models;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Repository.Interfaces;
 using MediatR;

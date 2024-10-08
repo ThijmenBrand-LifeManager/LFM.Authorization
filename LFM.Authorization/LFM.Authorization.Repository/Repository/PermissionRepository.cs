@@ -1,4 +1,4 @@
-using LFM.Authorization.Core.Models;
+using LFM.Authorization.AspNetCore.Models;
 using LFM.Authorization.Repository.Interfaces;
 
 namespace LFM.Authorization.Repository.Repository;

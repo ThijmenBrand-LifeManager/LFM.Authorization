@@ -1,7 +1,6 @@
 using System.Runtime.CompilerServices;
 using LFM.Authorization.AspNetCore.Database;
 using LFM.Authorization.AspNetCore.Models;
-using LFM.Authorization.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
