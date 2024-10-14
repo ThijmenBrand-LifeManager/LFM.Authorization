@@ -5,6 +5,12 @@ trigger:
       - develop
       - release
 
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: LFM.Pipelines
+
 stages:
   - stage: Build NuGet
     displayName: Build
@@ -14,6 +20,6 @@ stages:
   - stage: Build application
     displayName: Build application
     jobs:
-      - template: build.yml@LFM.Pipelines
+      - template: build.yml@templates
         parameters:
           buildType: application
