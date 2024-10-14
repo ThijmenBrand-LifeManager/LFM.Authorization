@@ -16,6 +16,10 @@ stages:
     displayName: Build
     jobs:
       - template: build.yml
+
+  - stage: build_application
+    displayName: Build application
+    jobs:
       - template: build.yml@templates
         parameters:
-          applicationName: lfm-authorization
+          applicationName: "lfm-authorization"
