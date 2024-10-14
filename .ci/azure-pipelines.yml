@@ -12,12 +12,12 @@ resources:
       name: LFM.Pipelines
 
 stages:
-  - stage: build-nuget
+  - stage: build_nuget
     displayName: Build
     jobs:
       - template: build.yml
 
-  - stage: build-application
+  - stage: build_application
     displayName: Build application
     jobs:
       - template: build.yml@templates
