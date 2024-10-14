@@ -20,3 +20,4 @@ stages:
       - template: build.yml@templates
         parameters:
           applicationName: "lfm-authorization"
+          dockerfile: "LFM.Authorization/Dockerfile"
