@@ -1,6 +1,6 @@
 jobs:
   - job: Build_Authorization_Package
-    name: "Build the project"
+    displayName: "Build the project"
 
     pool:
       name: Azure Pipelines
