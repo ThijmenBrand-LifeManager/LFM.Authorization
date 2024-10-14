@@ -32,10 +32,4 @@ public class Users(IHttpContextAccessor httpContextAccessor, UserManager<LfmUser
 
         return Ok(userObject);
     }
-
-    [HttpGet("test")]
-    public async Task<IActionResult> TestEndpoint()
-    {
-        return Ok("Hello World");
-    }
 }
