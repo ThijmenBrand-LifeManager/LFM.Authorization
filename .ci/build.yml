@@ -1,4 +1,4 @@
-- job: Build
+job:
   displayName: "Build the project"
 
   pool:
