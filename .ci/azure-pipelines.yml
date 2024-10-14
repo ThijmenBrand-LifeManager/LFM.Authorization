@@ -15,7 +15,5 @@ stages:
   - stage: Build
     displayName: Build
     jobs:
-      - template: build.yml
-      - template: build.yml@templates
-        parameters:
-          applicationName: "lfm-authorization"
+      - job: build_nuget
+        template: build.yml
