@@ -15,5 +15,4 @@ stages:
   - stage: Build
     displayName: Build
     jobs:
-      - job: build_nuget
-        template: build.yml
+      - template: build.yml
