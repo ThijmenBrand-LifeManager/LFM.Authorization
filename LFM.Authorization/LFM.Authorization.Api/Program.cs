@@ -1,3 +1,8 @@
+using FluentValidation;
+using LFM.Authorization.Application;
+using LFM.Authorization.AspNetCore;
+using LFM.Authorization.Core;
+using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -12,18 +17,37 @@ if (enableSwagger)
     builder.Services.AddSwagger();
 }
 
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication().AddBearerToken(IdentityConstants.BearerScheme);
+builder.Services.AddCoreModule(builder.Configuration);
+builder.Services.AddRepositoryModule(builder.Configuration);
+builder.Services.AddApplicationModule(builder.Configuration);
 
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddEntityFrameworkStores<DatabaseContext>()
-    .AddApiEndpoints();
+builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
+    {
+        options.Password.RequireDigit = true;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireUppercase = true;
+        options.Password.RequireNonAlphanumeric = true;
+        options.Password.RequiredLength = 12;
+    })
+    .AddEntityFrameworkStores<DatabaseContext>();
+
+builder.Services.AddLfmAuthorization(builder.Configuration);
+
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+const string CorsDevelopmentPolicy = "local_development";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: CorsDevelopmentPolicy, policy =>
+    {
+        policy.WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddRepositoryModule(builder.Configuration);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,12 +59,13 @@ if (enableSwagger)
     app.ApplyMigrations();
 }
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseHttpsRedirection();
 
 app.MapControllers();
-app.MapIdentityApi<IdentityUser>();
+
+app.UseCors(CorsDevelopmentPolicy);
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();

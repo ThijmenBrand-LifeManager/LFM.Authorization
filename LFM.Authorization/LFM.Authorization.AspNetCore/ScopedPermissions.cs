@@ -1,7 +1,7 @@
 namespace LFM.Authorization.AspNetCore;
 
-public class ScopedPermissions(string permissions, string scopeMask)
+public class ScopedPermission(string permission, string scopeMask)
 {
-    public string Permissions { get; private set; } = permissions;
-    public string ScopeMask { get; private set; } = scopeMask;
+    public string Permission { get; set; } = permission;
+    public string ScopeMask { get; set; } = scopeMask;
 }

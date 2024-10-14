@@ -1,3 +1,5 @@
+using LFM.Authorization.Repository.Interfaces;
+using LFM.Authorization.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +12,10 @@ public static class RepositoryModule
     {
         services.AddDbContext<DatabaseContext>(options =>
             options.UseNpgsql(configuration.GetSection("Postgres").GetValue<string>("ConnectionString")));
+
+        services.AddTransient<IPermissionRepository, PermissionRepository>();
+        services.AddTransient<IRoleRepository, RoleRepository>();
+        services.AddTransient<IRoleAssignmentRepository, RoleAssignmentRepository>();
         
         return services;
     }

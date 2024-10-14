@@ -5,8 +5,19 @@ trigger:
       - develop
       - release
 
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: LFM.Pipelines
+
 stages:
   - stage: Build
     displayName: Build
     jobs:
       - template: build.yml
+
+      - template: build.yml@templates
+        parameters:
+          applicationName: "lfm-authorization"
+          dockerfile: "LFM.Authorization/Dockerfile"
