@@ -6,7 +6,7 @@ namespace LFM.Authorization.AspNetCore;
 public class LfmAuthorizeAttribute: Attribute, IAuthorizeData
 {
     private readonly List<ScopedPermission> _scopedPermissions = new();
-
+ 
     public LfmAuthorizeAttribute() : this(new List<string>().ToArray(), new List<string>().ToArray()) { }
     
     public LfmAuthorizeAttribute(string[] permissions, string[] scopeMask)

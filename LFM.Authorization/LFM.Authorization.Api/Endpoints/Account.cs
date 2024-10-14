@@ -26,10 +26,17 @@ public class AccountController(
         
         var result = await signInManager.CheckPasswordSignInAsync(user, model.Password, false);
         if (!result.Succeeded) return Unauthorized();
-        
+
         var token = tokenService.CreateToken(user);
+        var authentication = new AuthenticationDto()
+        {
+            Id = user.Id,
+            Username = user.UserName,
+            Email = user.Email!,
+            Token = token,
+        };
         
-        return Ok(token);
+        return Ok(authentication);
     }
     
     [HttpPost("register")]

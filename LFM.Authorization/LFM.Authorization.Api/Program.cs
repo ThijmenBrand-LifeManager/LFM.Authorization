@@ -35,6 +35,17 @@ builder.Services.AddLfmAuthorization(builder.Configuration);
 
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
+const string CorsDevelopmentPolicy = "local_development";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: CorsDevelopmentPolicy, policy =>
+    {
+        policy.WithOrigins("*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
@@ -51,6 +62,8 @@ if (enableSwagger)
 app.UseHttpsRedirection();
 
 app.MapControllers();
+
+app.UseCors(CorsDevelopmentPolicy);
 
 app.UseAuthentication();
 app.UseAuthorization();
