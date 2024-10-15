@@ -29,7 +29,7 @@ stages:
 
   - stage: Test
     displayName: Test
-    condition: and(succeeded(), or(eq(variables['Build.Reason'], 'PullRequest'), eq(parameters.RunTests, true)))
+    condition: and(succeeded(), or(eq(variables['Build.Reason'], 'PullRequest'), eq(${{ parameters.RunTests }}, true)))
     jobs:
       - template: security-scan.yml@templates
         parameters:
