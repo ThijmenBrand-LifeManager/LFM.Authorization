@@ -1,3 +1,8 @@
+parameters:
+  - name: RunTests
+    type: boolean
+    default: true
+
 trigger:
   batch: true
   branches:
@@ -21,3 +26,13 @@ stages:
         parameters:
           applicationName: "lfm-authorization"
           dockerfile: "LFM.Authorization/Dockerfile"
+
+  - stage: Test
+    displayName: Test
+    condition: and(succeeded(), or(eq(variables['Build.Reason'], 'PullRequest'), eq(parameters.RunTests, true)))
+    jobs:
+      - template: security-scan.yml@templates
+        parameters:
+          organization: lifemanager
+          projectKey: ThijmenBrand_LFM.Authorization
+          projectName: LFM.Authorization
