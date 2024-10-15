@@ -17,17 +17,12 @@ resources:
       name: LFM.Pipelines
 
 stages:
-  - stage: Build
+  - stage: publish_package
     displayName: Build
     jobs:
       - template: build.yml
 
-      - template: build.yml@templates
-        parameters:
-          applicationName: "lfm-authorization"
-          dockerfile: "LFM.Authorization/Dockerfile"
-
-  - stage: Test
+  - stage: test_application
     displayName: Test
     condition: and(succeeded(), or(eq(variables['Build.Reason'], 'PullRequest'), eq(${{ parameters.RunTests }}, true)))
     jobs:
@@ -36,3 +31,11 @@ stages:
           organization: lifemanager
           projectKey: ThijmenBrand_LFM.Authorization
           projectName: LFM.Authorization
+
+  - stage: deploy_application
+    displayName: Deploy
+    jobs:
+      - template: build.yml@templates
+        parameters:
+          applicationName: "lfm-authorization"
+          dockerfile: "LFM.Authorization/Dockerfile"
