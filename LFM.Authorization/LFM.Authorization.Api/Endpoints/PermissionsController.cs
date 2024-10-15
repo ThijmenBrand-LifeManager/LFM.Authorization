@@ -24,7 +24,7 @@ public class PermissionsController(ISender sender, PermissionValidator validator
     public async Task<IResult> CreatePermission([FromBody] CreatePermissionDto command)
     {
         ValidateDto(command);
-        var permission = await sender.Send(new CreatePermissionCommand(command.Name, command.Description));
+        var permission = await sender.Send(new CreatePermissionCommand(command.Name, command.Category, command.Description));
         return Results.Ok(permission);
     }
     

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LFM.Authorization.Endpoints;
 
 [ApiController]
-[Route("[controller]")]
+[Route("auth")]
 public class AccountController(
     UserManager<LfmUser> userManager,
     ITokenService tokenService,

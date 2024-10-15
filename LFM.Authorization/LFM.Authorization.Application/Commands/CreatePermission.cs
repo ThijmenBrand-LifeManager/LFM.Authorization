@@ -5,7 +5,7 @@ using MediatR;
 
 namespace LFM.Authorization.Application.Commands;
 
-public record CreatePermissionCommand(string Name, string? Description) : IRequest<Permission>;
+public record CreatePermissionCommand(string Name, string Category, string? Description) : IRequest<Permission>;
 
 public class CreatePermissionCommandHandler(IPermissionRepository permissionRepository) : IRequestHandler<CreatePermissionCommand, Permission>
 {
@@ -14,6 +14,7 @@ public class CreatePermissionCommandHandler(IPermissionRepository permissionRepo
         var permission = new Permission
         {
             Name = request.Name,
+            Category = request.Category,
             Description = request.Description
         };
 

@@ -1,6 +1,7 @@
 using System.Text;
 using LFM.Authorization.AspNetCore.Database;
 using LFM.Authorization.AspNetCore.Services;
+using LFM.Authorization.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ public static class AspNetCoreModule
 {
     public static IServiceCollection AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
+        services.Configure<JWT>(configuration.GetSection("Jwt"));
         services.AddDbContext<AuthorizationDbContext>(options =>
             options.UseNpgsql(configuration.GetSection("Authorization").GetValue<string>("ConnectionString")));
         
@@ -25,16 +27,19 @@ public static class AspNetCoreModule
             options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         }).AddJwtBearer(config =>
         {
-            var key = configuration.GetSection("Jwt").GetValue<string>("Secret") ?? throw new ArgumentNullException();
+            config.RequireHttpsMetadata = false;
+            config.SaveToken = false;
             config.TokenValidationParameters = new TokenValidationParameters
             {
-                ValidateIssuer = true,
-                ValidIssuer = configuration.GetSection("Jwt").GetValue<string>("Issuer"),
-                ValidateAudience = true,
-                ValidAudience = configuration.GetSection("Jwt").GetValue<string>("Audience"),
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                ValidateIssuer = true,
+                ValidateAudience = true,
                 ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+                
+                ValidIssuer = configuration["Jwt:Issuer"],
+                ValidAudience = configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]!)),
             };
         });
         services.AddAuthorization();
