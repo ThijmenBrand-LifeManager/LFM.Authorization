@@ -16,7 +16,7 @@ on:
 
 jobs:
   build-and-publish-package:
-    uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-package.yml@main
+    uses: ThijmenBrand-LifeManager/LFM.Pipelines/build-package.yml@main
     with:
       solution-file: LFM.Authorization/LFM.Authorization.sln
       project-file: LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
@@ -25,7 +25,7 @@ jobs:
     secrets: inherit
 
   build-and-test:
-    uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-and-test.yml@main
+    uses: ThijmenBrand-LifeManager/LFM.Pipelines/build-and-test.yml@main
     with:
       dotnet-version: 8.0.x
       solution-file: LFM.Authorization/LFM.Authorization.sln
