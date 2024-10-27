@@ -41,7 +41,7 @@ jobs:
 
       #build the project
       - name: Build the project
-        run: dotnet build LFM.Authorization/*.csproj --no-restore --configuration $BUILD_CONFIGURATION
+        run: dotnet build $SOLUTION_FILE --no-restore --configuration $BUILD_CONFIGURATION
 
       #pack the project
       - name: NuGet pack
