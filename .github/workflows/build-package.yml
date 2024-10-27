@@ -2,7 +2,7 @@ name: Build Authorization package
 
 on:
   workflow_call:
-    input:
+    inputs:
       solution-file:
         required: true
         type: string
