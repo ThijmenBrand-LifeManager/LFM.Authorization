@@ -23,3 +23,11 @@ jobs:
       build-configuration: Release
       dotnet-version: 8.0.x
     secrets: inherit
+
+  build-and-test:
+    uses: ./.github/workflows/build-and-test.yml
+    with:
+      dotnet-version: 8.0.x
+      solution-file: LFM.Authorization/LFM.Authorization.sln
+      build-configuration: Release
+    secrets: inherit

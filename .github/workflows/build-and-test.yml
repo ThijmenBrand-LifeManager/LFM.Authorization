@@ -1,0 +1,49 @@
+name: Build and test application
+
+on:
+  workflow_call:
+    inputs:
+      dotnet-version:
+        required: true
+        type: string
+      solution-file:
+        required: true
+        type: string
+      build-configuration:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+          cache: true
+
+      - name: Add GitHub NuGet package registry
+        run: dotnet nuget add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ inputs.solution-file }}
+
+      - name: Build the project
+        run: dotnet build ${{ inputs.solution-file }} --no-restore --configuration ${{ inputs.build-configuration }}
+
+      - name: Test the project
+        run: dotnet test ${{ inputs.solution-file }} --no-build --no-restore --results-directory "TestResults-${{ inputs.dotnet-version }}"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: dotnet-test-results-${{ inputs.dotnet-version }}
+          path: TestResults-${{ inputs.dotnet-version }}
+        if: ${{ always() }}
+
+  analyse:
+    uses: ./.github/workflows/sonar-qube.yml
+    secrets: inherit
