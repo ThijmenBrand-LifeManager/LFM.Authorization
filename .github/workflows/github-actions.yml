@@ -48,4 +48,4 @@ jobs:
         run: dotnet pack "LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj" --output ./nupkg -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=$BUILD_CONFIGURATION
 
       - name: Push packages
-        run: dotnet nuget push ./nupkg/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget push ./nupkg/*.nupkg --source github --api-key ${{ secrets.PACKAGE_TOKEN_SECRET }}
