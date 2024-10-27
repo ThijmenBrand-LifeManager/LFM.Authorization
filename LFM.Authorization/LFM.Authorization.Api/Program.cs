@@ -2,6 +2,7 @@ using FluentValidation;
 using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;
 using LFM.Authorization.Core;
+using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
@@ -32,8 +33,9 @@ builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<DatabaseContext>();
 
 builder.Services.AddLfmAuthorization(builder.Configuration);
-
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.RegisterMasstransit(builder.Configuration, enableQueueListener: false);
 
 const string CorsDevelopmentPolicy = "local_development";
 builder.Services.AddCors(options =>

@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <PackageReference Include="Azure.Data.Tables" Version="12.9.1" />
+      <PackageReference Include="MassTransit.Abstractions" Version="8.3.0" />
+      <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.0" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
         <PrivateAssets>all</PrivateAssets>
@@ -17,6 +19,12 @@
       <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.8" />
       <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.1.1" />
       <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+        <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\shared\Microsoft.AspNetCore.App\8.0.1\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

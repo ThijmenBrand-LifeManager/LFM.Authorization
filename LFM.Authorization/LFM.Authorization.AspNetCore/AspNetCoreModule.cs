@@ -46,8 +46,11 @@ public static class AspNetCoreModule
 
         services.AddSingleton<IAuthorizationHandler, LfmAuthorizationHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, LfmAuthorizationPolicyProvider>();
+        
+        var scope = services.BuildServiceProvider().CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<AuthorizationDbContext>();
 
-        return new PermissionsBuilder(services);
+        return new PermissionsBuilder(services, context);
     }
 
 }

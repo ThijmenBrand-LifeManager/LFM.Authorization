@@ -4,23 +4,81 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace LFM.Authorization.AspNetCore;
 
-public class PermissionsBuilder(IServiceCollection services)
+public class PermissionsBuilder(IServiceCollection services, AuthorizationDbContext context)
 {
-    public PermissionsBuilder InsertPermissions(IEnumerable<InsertPermissionsDto> permissions)
+    public PermissionsBuilder InsertPermissions(InsertMultiplePermissionsOnMultipleRolesDto options)
     {
-        foreach (var permission in permissions)
+        foreach (var permission in options.Permissions)
         {
             InsertPermission(permission.Name, permission.Category);
         }
 
+        foreach (var role in options.Roles)
+        {
+            AddDefaultRolePermissions(role, options.Permissions);
+        }
+
+        return this;
+    }
+
+    public PermissionsBuilder InsertPermissions(InsertMultiplePermissionsOnSingleRoleDto options)
+    {
+        foreach (var permission in options.Permissions)
+        {
+            InsertPermission(permission.Name, permission.Category);
+        }
+        
+        AddDefaultRolePermissions(options.Role, options.Permissions);
+
+        return this;
+    }
+
+    public PermissionsBuilder InsertPermissions(InsertPermissionOnMultipleRolesDto options)
+    {
+        InsertPermission(options.Permission.Name, options.Permission.Category);
+        
+        foreach (var role in options.Roles)
+        {
+            AddDefaultRolePermissions(role, new[] { options.Permission });
+        }
+
+        return this;
+    }
+
+    public PermissionsBuilder InsertPermissions(InsertPermissionOnSingleRoleDto options)
+    {
+        InsertPermission(options.Permission.Name, options.Permission.Category);
+        
+        AddDefaultRolePermissions(options.Role, new[] { options.Permission });
+
         return this;
     }
     
-    public PermissionsBuilder InsertPermission(string name, string category)
+    private void AddDefaultRolePermissions(DefaultRoles role, IEnumerable<PermissionDto> permissions)
     {
-        var scope = services.BuildServiceProvider().CreateScope();
-        var context = scope.ServiceProvider.GetService<AuthorizationDbContext>() ?? throw new Exception("could not get AuthorizationDbContext");
+        foreach (var permission in permissions)
+        {
+            InsertDefaultRolePermission(role, permission.Name);
+        }
+    }
+    
+    private void InsertDefaultRolePermission(DefaultRoles role, string permissionName)
+    {
+        var defaultAssignmentExists = context.DefaultRolePermissions.Any(drp =>
+            drp.Role == role.ToString() && drp.PermissionName == permissionName);
+        if (defaultAssignmentExists) return;
+
+        context.DefaultRolePermissions.Add(new DefaultRolePermission
+        {
+            Role = role.ToString(),
+            PermissionName = permissionName
+        });
         
+        context.SaveChanges();
+    }
+    
+    private void InsertPermission(string name, string category)
+    {
         var permission = new Permission
         {
             Name = name,
@@ -35,7 +93,5 @@ public class PermissionsBuilder(IServiceCollection services)
         }
 
         context.SaveChanges();
-
-        return this;
     }
 }

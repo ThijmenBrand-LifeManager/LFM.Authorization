@@ -23,24 +23,35 @@ namespace LFM.Authorization.Repository.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("LFM.Authorization.AspNetCore.Models.DefaultRolePermission", b =>
+                {
+                    b.Property<string>("Role")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PermissionName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Role", "PermissionName");
+
+                    b.HasIndex("PermissionName");
+
+                    b.ToTable("DefaultRolePermissions", "identity");
+                });
+
             modelBuilder.Entity("LFM.Authorization.AspNetCore.Models.LfmRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnOrder(0);
+
+                    b.Property<string>("Scope")
+                        .HasColumnType("text")
+                        .HasColumnOrder(1);
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Scope")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
+                    b.HasKey("Name", "Scope");
 
                     b.ToTable("Roles", "identity");
                 });
@@ -69,19 +80,23 @@ namespace LFM.Authorization.Repository.Migrations
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("text")
-                        .HasColumnOrder(1);
+                        .HasColumnOrder(0);
 
                     b.Property<string>("Scope")
                         .HasColumnType("text")
-                        .HasColumnOrder(2);
+                        .HasColumnOrder(1);
 
-                    b.Property<string>("RoleId")
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RoleScope")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("UserId", "Scope");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleName", "RoleScope");
 
                     b.ToTable("RoleAssignments", "identity");
                 });
@@ -155,12 +170,15 @@ namespace LFM.Authorization.Repository.Migrations
                     b.Property<string>("PermissionsName")
                         .HasColumnType("text");
 
-                    b.Property<string>("RolesId")
+                    b.Property<string>("RolesName")
                         .HasColumnType("text");
 
-                    b.HasKey("PermissionsName", "RolesId");
+                    b.Property<string>("RolesScope")
+                        .HasColumnType("text");
 
-                    b.HasIndex("RolesId");
+                    b.HasKey("PermissionsName", "RolesName", "RolesScope");
+
+                    b.HasIndex("RolesName", "RolesScope");
 
                     b.ToTable("LfmRolePermission", "identity");
                 });
@@ -297,11 +315,22 @@ namespace LFM.Authorization.Repository.Migrations
                     b.ToTable("AspNetUserTokens", "identity");
                 });
 
+            modelBuilder.Entity("LFM.Authorization.AspNetCore.Models.DefaultRolePermission", b =>
+                {
+                    b.HasOne("LFM.Authorization.AspNetCore.Models.Permission", "Permission")
+                        .WithMany()
+                        .HasForeignKey("PermissionName")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permission");
+                });
+
             modelBuilder.Entity("LFM.Authorization.AspNetCore.Models.RoleAssignment", b =>
                 {
                     b.HasOne("LFM.Authorization.AspNetCore.Models.LfmRole", "Role")
                         .WithMany("RoleAssignments")
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("RoleName", "RoleScope")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -318,7 +347,7 @@ namespace LFM.Authorization.Repository.Migrations
 
                     b.HasOne("LFM.Authorization.AspNetCore.Models.LfmRole", null)
                         .WithMany()
-                        .HasForeignKey("RolesId")
+                        .HasForeignKey("RolesName", "RolesScope")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

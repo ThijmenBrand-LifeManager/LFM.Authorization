@@ -43,11 +43,12 @@ public class RolesController(ISender sender, RoleValidator validator, IHttpConte
         return Results.Ok(roles);
     }
 
-    [HttpPut("workstream/{workstreamId}/role/{roleId}/addPermission")]
+    [HttpPut("workstream/{workstreamId}/role/{roleName}/addPermission")]
     [LfmAuthorize([Permissions.WorkstreamConfigurer], [ScopeHelper.ScopeMaskWorkStream])]
-    public async Task<IResult> AddPermissionToRole([FromRoute] string roleId, [FromBody] string permission)
+    public async Task<IResult> AddPermissionToRole([FromRoute] string roleName, string workstreamId, [FromBody] string permission)
     {
-        var result = await sender.Send(new AddPermissionToRoleCommand(roleId, permission));
+        var scope = $"/workstream/{workstreamId}";
+        var result = await sender.Send(new AddPermissionToRoleCommand(roleName, scope, permission));
         return Results.Ok(result);
     }
     

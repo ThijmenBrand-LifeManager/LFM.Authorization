@@ -10,6 +10,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : Identi
     public DbSet<LfmRole> Roles { get; set; }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RoleAssignment> RoleAssignments { get; set; }
+    public DbSet<DefaultRolePermission> DefaultRolePermissions { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

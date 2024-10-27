@@ -1,15 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace LFM.Authorization.AspNetCore.Models;
 
+[PrimaryKey(nameof(Name), nameof(Scope))]
 public class LfmRole
 {
-    [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)] public string Id { get; set; }
-    public required string Name { get; set; }
-    public required string Scope { get; set; }
-    public string? Description { get; set; }
+    [Column(Order = 0)] public required string Name { get; init; }
+    [Column(Order = 1)] public required string Scope { get; init; }
+    public string? Description { get; init; }
     public ICollection<Permission> Permissions { get; } = [];
     [JsonIgnore] public ICollection<RoleAssignment> RoleAssignments { get; } = [];
 }

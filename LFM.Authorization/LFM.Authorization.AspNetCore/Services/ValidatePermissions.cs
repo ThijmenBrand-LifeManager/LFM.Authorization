@@ -18,7 +18,7 @@ public class ValidatePermissions(AuthorizationDbContext context) : IValidatePerm
 
         var isAllowed = false;
 
-        foreach (var applicableRoles in scopedPermissions.Select(requirement => roleAssignments.Where(role => scopedPermissions.Any(x => x.Scope.isChildScope(role.Scope)))))
+        foreach (var applicableRoles in scopedPermissions.Select(requirement => roleAssignments.Where(role => scopedPermissions.Any(x => x.Scope.IsChildScope(role.Scope)))))
         {
             isAllowed = CheckPermissions(applicableRoles.Select(x => x.Role), scopedPermissions);
             if (isAllowed)

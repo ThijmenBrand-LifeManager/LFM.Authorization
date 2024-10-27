@@ -10,15 +10,17 @@ public class AuthorizationDbContext(DbContextOptions<AuthorizationDbContext> opt
     public DbSet<LfmRole> Roles { get; set; }
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RoleAssignment> RoleAssignments { get; set; }
+    public DbSet<DefaultRolePermission> DefaultRolePermissions { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasDefaultSchema("identity");
+        
         modelBuilder.Entity<LfmRole>()
             .HasMany(x => x.RoleAssignments)
             .WithOne(x => x.Role)
-            .HasForeignKey(x => x.RoleId);
+            .HasForeignKey(x => x.RoleName);
     }
 }

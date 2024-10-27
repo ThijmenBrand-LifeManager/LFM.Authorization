@@ -18,8 +18,14 @@ public static partial class ScopeHelper
         var matches = ScopeVariableRegex.Matches(scopeVariable);
         return matches.Select(m => m.Value.Replace(ScopeVariableStart, string.Empty).Replace(ScopeVariableEnd, string.Empty));
     }
+    
+    public static string CreateWorkstreamScope(string workstreamId) =>
+        $"{ScopeMaskWorkStream.Replace(ScopeVariableStart, string.Empty).Replace(ScopeVariableEnd, string.Empty)}{workstreamId}";
+    
+    public static string CreateProjectScope(string workstreamId, string projectId) =>
+        $"{ScopeMaskProject.Replace(ScopeVariableStart, string.Empty).Replace(ScopeVariableEnd, string.Empty)}{workstreamId}{ScopeLevelSeperator}{projectId}";
 
-    public static bool isChildScope(this string scope, string parent)
+    public static bool IsChildScope(this string scope, string parent)
     {
         if(!scope.EndsWith(ScopeLevelSeperator))
             scope += ScopeLevelSeperator;
