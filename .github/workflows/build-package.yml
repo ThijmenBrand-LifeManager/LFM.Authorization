@@ -15,7 +15,6 @@ on:
       dotnet-version:
         required: true
         type: string
-
     secrets:
       PACKAGE_TOKEN_SECRET:
         required: true
@@ -53,7 +52,7 @@ jobs:
 
       #pack the project
       - name: NuGet pack
-        run: dotnet pack ${{ project-file }} --output ./nupkg -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=${{ inputs.build-configuration }}
+        run: dotnet pack ${{ inputs.project-file }} --output ./nupkg -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=${{ inputs.build-configuration }}
 
       - name: Push packages
         run: dotnet nuget push ./nupkg/*.nupkg --source github --api-key ${{ secrets.PACKAGE_TOKEN_SECRET }}
