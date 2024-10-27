@@ -4,6 +4,7 @@ env:
   GITHUB_NAMESPACE: ThijmenBrand-LifeManager
   GITHUB_USERNAME: ThijmenBrand
   BUILD_CONFIGURATION: Release
+  SOLUTION_FILE: LFM.Authorization/LFM.Authorization.sln
 
 on:
   workflow_dispatch:
@@ -36,15 +37,15 @@ jobs:
         run: dotnet nuget add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
       - name: Restore NuGet packages
-        run: dotnet restore LFM.Authorization/LFM.Authorization.sln
+        run: dotnet restore $SOLUTION_FILE
 
       #build the project
       - name: Build the project
-        run: dotnet build "**/*.csproj" --no-restore --configuration $BUILD_CONFIGURATION
+        run: dotnet build LFM.Authorization/*.csproj --no-restore --configuration $BUILD_CONFIGURATION
 
       #pack the project
       - name: NuGet pack
-        run: dotnet pack "**/LFM.Authorization.AspNetCore.csproj" -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=$BUILD_CONFIGURATION
+        run: dotnet pack "LFM.Authorization/LFM.Authorization.AspNetCore.csproj" -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=$BUILD_CONFIGURATION
 
       - name: Upload NuGet package to GitHub
         uses: actions/upload-artifact@v4
@@ -66,4 +67,4 @@ jobs:
         run: dotnet nuget add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
       - name: Push packages
-        run: dotnet nuget push "**/*.nupkg" --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+        run: dotnet nuget push nugetPackage/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
