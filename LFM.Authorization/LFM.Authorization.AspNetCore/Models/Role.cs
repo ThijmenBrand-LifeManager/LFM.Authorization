@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LFM.Authorization.AspNetCore.Models;
 
-[PrimaryKey(nameof(Name), nameof(Scope))]
 public class LfmRole
 {
     [Column(Order = 0)] public required string Name { get; init; }
