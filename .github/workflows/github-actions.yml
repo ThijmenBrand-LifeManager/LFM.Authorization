@@ -18,8 +18,8 @@ jobs:
   build-and-publish-package:
     uses: ./.github/workflows/build-package.yml
     with:
-      solution-file: $SOLUTION_FILE
-      project-file: $PROJECT_FILE
-      build-configuration: $BUILD_CONFIGURATION
+      solution-file: LFM.Authorization/LFM.Authorization.sln
+      project-file: LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
+      build-configuration: Release
       dotnet-version: 8.0.x
     secrets: inherit
