@@ -38,7 +38,7 @@ jobs:
         run: dotnet test ${{ inputs.solution-file }} --no-build --no-restore --results-directory "TestResults-${{ inputs.dotnet-version }}"
 
       - name: Upload test results
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: dotnet-test-results-${{ inputs.dotnet-version }}
           path: TestResults-${{ inputs.dotnet-version }}
