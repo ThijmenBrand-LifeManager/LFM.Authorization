@@ -13,7 +13,7 @@ namespace LFM.Authorization.AspNetCore;
 
 public static class AspNetCoreModule
 {
-    public static IServiceCollection AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
+    public static PermissionsBuilder AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JWT>(configuration.GetSection("Jwt"));
         services.AddDbContext<AuthorizationDbContext>(options =>
@@ -47,7 +47,7 @@ public static class AspNetCoreModule
         services.AddSingleton<IAuthorizationHandler, LfmAuthorizationHandler>();
         services.AddSingleton<IAuthorizationPolicyProvider, LfmAuthorizationPolicyProvider>();
 
-        return services;
+        return new PermissionsBuilder(services);
     }
 
 }

@@ -11,12 +11,6 @@ public class AuthorizationDbContext(DbContextOptions<AuthorizationDbContext> opt
     public DbSet<Permission> Permissions { get; set; }
     public DbSet<RoleAssignment> RoleAssignments { get; set; }
     
-    public override int SaveChanges()
-    {
-        // Throw if they try to call this
-        throw new InvalidOperationException("This context is read-only.");
-    }
-    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
