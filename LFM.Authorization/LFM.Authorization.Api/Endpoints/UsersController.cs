@@ -12,7 +12,7 @@ namespace LFM.Authorization.Endpoints;
 
 [ApiController]
 [Route("users")]
-public class Users(IHttpContextAccessor httpContextAccessor, UserManager<LfmUser> userManager) : ControllerBase
+public class UsersController(IHttpContextAccessor httpContextAccessor, UserManager<LfmUser> userManager) : ControllerBase
 {
     [HttpGet("me")]
     [LfmAuthorize]
