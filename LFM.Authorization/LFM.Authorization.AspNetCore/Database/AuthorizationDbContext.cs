@@ -17,10 +17,5 @@ public class AuthorizationDbContext(DbContextOptions<AuthorizationDbContext> opt
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasDefaultSchema("identity");
-        
-        modelBuilder.Entity<LfmRole>()
-            .HasMany(x => x.RoleAssignments)
-            .WithOne(x => x.Role)
-            .HasForeignKey(x => x.RoleName);
     }
 }

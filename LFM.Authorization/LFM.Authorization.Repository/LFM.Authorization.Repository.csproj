@@ -17,4 +17,8 @@
       <ProjectReference Include="..\LFM.Authorization.Core\LFM.Authorization.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations\" />
+    </ItemGroup>
+
 </Project>

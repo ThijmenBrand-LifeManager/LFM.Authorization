@@ -45,7 +45,7 @@ public class PermissionsBuilder(IServiceCollection services, AuthorizationDbCont
     private void InsertDefaultRolePermission(DefaultRoles role, string permissionName)
     {
         var defaultAssignmentExists = context.DefaultRolePermissions.Any(drp =>
-            drp.Role == role.ToString() && drp.PermissionName == permissionName);
+            drp.Role == role.ToString() && drp.Permission.Name == permissionName);
         if (defaultAssignmentExists) return;
 
         context.DefaultRolePermissions.Add(new DefaultRolePermission

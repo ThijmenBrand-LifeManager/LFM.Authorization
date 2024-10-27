@@ -19,8 +19,7 @@ public class CreateRoleAssignmentCommandHandler(IRoleRepository roleRepository,
         {
             UserId = request.UserId,
             Scope = request.Scope,
-            RoleName = role.Name,
-            RoleScope = role.Scope
+            Role = role
         };
 
         return await roleAssignmentRepository.CreateAsync(roleAssignment, cancellationToken);

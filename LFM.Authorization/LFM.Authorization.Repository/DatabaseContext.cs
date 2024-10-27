@@ -17,18 +17,5 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : Identi
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasDefaultSchema("identity");
-        modelBuilder.Entity<LfmRole>()
-            .HasKey(r => new { r.Name, r.Scope });
-        
-        modelBuilder.Entity<Permission>()
-            .HasKey(p => p.Name);
-        
-        modelBuilder.Entity<RoleAssignment>()
-            .HasKey(ra => new { ra.UserId, ra.Scope });
-
-        modelBuilder.Entity<RoleAssignment>()
-            .HasOne<LfmRole>()
-            .WithMany(x => x.RoleAssignments)
-            .HasForeignKey(ra => new { ra.RoleName, ra.RoleScope });
     }
 }

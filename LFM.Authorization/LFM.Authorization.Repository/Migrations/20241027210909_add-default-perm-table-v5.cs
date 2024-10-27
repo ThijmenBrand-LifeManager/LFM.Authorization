@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LFM.Authorization.Repository.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class adddefaultpermtablev5 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,6 +62,7 @@ namespace LFM.Authorization.Repository.Migrations
                 columns: table => new
                 {
                     Name = table.Column<string>(type: "text", nullable: false),
+                    Category = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -74,14 +75,13 @@ namespace LFM.Authorization.Repository.Migrations
                 schema: "identity",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Scope = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => new { x.Name, x.Scope });
                 });
 
             migrationBuilder.CreateTable(
@@ -202,16 +202,37 @@ namespace LFM.Authorization.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DefaultRolePermissions",
+                schema: "identity",
+                columns: table => new
+                {
+                    Role = table.Column<string>(type: "text", nullable: false),
+                    PermissionName = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DefaultRolePermissions", x => new { x.Role, x.PermissionName });
+                    table.ForeignKey(
+                        name: "FK_DefaultRolePermissions_Permissions_PermissionName",
+                        column: x => x.PermissionName,
+                        principalSchema: "identity",
+                        principalTable: "Permissions",
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LfmRolePermission",
                 schema: "identity",
                 columns: table => new
                 {
                     PermissionsName = table.Column<string>(type: "text", nullable: false),
-                    RolesId = table.Column<string>(type: "text", nullable: false)
+                    RolesName = table.Column<string>(type: "text", nullable: false),
+                    RolesScope = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LfmRolePermission", x => new { x.PermissionsName, x.RolesId });
+                    table.PrimaryKey("PK_LfmRolePermission", x => new { x.PermissionsName, x.RolesName, x.RolesScope });
                     table.ForeignKey(
                         name: "FK_LfmRolePermission_Permissions_PermissionsName",
                         column: x => x.PermissionsName,
@@ -220,11 +241,11 @@ namespace LFM.Authorization.Repository.Migrations
                         principalColumn: "Name",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LfmRolePermission_Roles_RolesId",
-                        column: x => x.RolesId,
+                        name: "FK_LfmRolePermission_Roles_RolesName_RolesScope",
+                        columns: x => new { x.RolesName, x.RolesScope },
                         principalSchema: "identity",
                         principalTable: "Roles",
-                        principalColumn: "Id",
+                        principalColumns: new[] { "Name", "Scope" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -235,17 +256,18 @@ namespace LFM.Authorization.Repository.Migrations
                 {
                     UserId = table.Column<string>(type: "text", nullable: false),
                     Scope = table.Column<string>(type: "text", nullable: false),
-                    RoleId = table.Column<string>(type: "text", nullable: true)
+                    RoleName = table.Column<string>(type: "text", nullable: true),
+                    RoleScope = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RoleAssignments", x => new { x.UserId, x.Scope });
                     table.ForeignKey(
-                        name: "FK_RoleAssignments_Roles_RoleId",
-                        column: x => x.RoleId,
+                        name: "FK_RoleAssignments_Roles_RoleName_RoleScope",
+                        columns: x => new { x.RoleName, x.RoleScope },
                         principalSchema: "identity",
                         principalTable: "Roles",
-                        principalColumn: "Id");
+                        principalColumns: new[] { "Name", "Scope" });
                 });
 
             migrationBuilder.CreateIndex(
@@ -293,23 +315,22 @@ namespace LFM.Authorization.Repository.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LfmRolePermission_RolesId",
+                name: "IX_DefaultRolePermissions_PermissionName",
+                schema: "identity",
+                table: "DefaultRolePermissions",
+                column: "PermissionName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LfmRolePermission_RolesName_RolesScope",
                 schema: "identity",
                 table: "LfmRolePermission",
-                column: "RolesId");
+                columns: new[] { "RolesName", "RolesScope" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_Name",
-                schema: "identity",
-                table: "Permissions",
-                column: "Name",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleAssignments_RoleId",
+                name: "IX_RoleAssignments_RoleName_RoleScope",
                 schema: "identity",
                 table: "RoleAssignments",
-                column: "RoleId");
+                columns: new[] { "RoleName", "RoleScope" });
         }
 
         /// <inheritdoc />
@@ -333,6 +354,10 @@ namespace LFM.Authorization.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens",
+                schema: "identity");
+
+            migrationBuilder.DropTable(
+                name: "DefaultRolePermissions",
                 schema: "identity");
 
             migrationBuilder.DropTable(
