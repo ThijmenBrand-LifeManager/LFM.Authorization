@@ -18,8 +18,8 @@ jobs:
   build-and-publish-package:
     uses: ./.github/workflows/build-package.yml
     with:
-      solution-file: ${{ env.SOLUTION_FILE }}
-      project-file: ${{ env.PROJECT_FILE }}
-      build-configuration: ${{ env.BUILD_CONFIGURATION }}
+      solution-file: $SOLUTION_FILE
+      project-file: $PROJECT_FILE
+      build-configuration: $BUILD_CONFIGURATION
       dotnet-version: 8.0.x
     secrets: inherit
