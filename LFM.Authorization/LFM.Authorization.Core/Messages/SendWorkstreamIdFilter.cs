@@ -1,4 +1,5 @@
 using MassTransit;
+using MassTransit.Serialization;
 using Microsoft.AspNetCore.Http;
 
 namespace LFM.Authorization.Core.Messages;
@@ -19,9 +20,9 @@ public class SendWorkstreamIdFilter<T> : IFilter<SendContext<T>> where T : class
 
     public Task Send(SendContext<T> context, IPipe<SendContext<T>> next)
     {
-        if (_httpContextAccessor.HttpContext != null)
+        if (_httpContextAccessor.HttpContext != null 
+            && _httpContextAccessor.HttpContext.Request.RouteValues.TryGetValue("workstreamId", out string workstreamId))
         {
-            var workstreamId = _httpContextAccessor.HttpContext.Request.RouteValues["workstreamId"] as string;
             context.Headers.Set("workstreamId", workstreamId);
         }
 
