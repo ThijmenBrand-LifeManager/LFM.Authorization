@@ -70,9 +70,6 @@ namespace LFM.Authorization.Repository.Migrations
 
                     b.HasKey("Name");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.ToTable("Permissions", "identity");
                 });
 

@@ -16,6 +16,7 @@ public static class RepositoryModule
         services.AddTransient<IPermissionRepository, PermissionRepository>();
         services.AddTransient<IRoleRepository, RoleRepository>();
         services.AddTransient<IRoleAssignmentRepository, RoleAssignmentRepository>();
+        services.AddTransient<IDefaultRolePermissionRepository, DefaultRolePermissionRepository>();
         
         return services;
     }
