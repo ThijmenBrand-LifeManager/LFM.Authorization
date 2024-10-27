@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ThijmenBrand-LifeManager_LFM.Authorization&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ThijmenBrand-LifeManager_LFM.Authorization)
+
 # Introduction 
 TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
 
