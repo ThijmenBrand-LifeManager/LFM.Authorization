@@ -1,0 +1,63 @@
+name: Build Authorization package
+
+on:
+  workflow_call:
+    input:
+      solution-file:
+        required: true
+        type: string
+        description: "The solution file to build"
+      project-file:
+        required: true
+        type: string
+        description: "The project file to pack"
+      build-configuration:
+        required: true
+        type: string
+        description: "The build configuration to use"
+      dotnet-version:
+        required: true
+        type: string
+        description: "The version of the .NET SDK to use"
+
+    secrets:
+      - GITHUB_TOKEN
+      - PACKAGE_TOKEN_SECRET
+
+env:
+  GITHUB_NAMESPACE: ThijmenBrand-LifeManager
+  GITHUB_USERNAME: ThijmenBrand
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set version
+        id: set_version
+        run: |
+          echo "version=$(date +'%Y.%m.%d').$(echo $GITHUB_RUN_NUMBER | cut -c1-7)" >> "$GITHUB_OUTPUT"
+
+      #restore nuget packages from github package registry
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ inputs.dotnet-version }}
+
+      - name: Add GitHub NuGet package registry
+        run: dotnet nuget add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+
+      - name: Restore NuGet packages
+        run: dotnet restore ${{ inputs.solution-file }}
+
+      #build the project
+      - name: Build the project
+        run: dotnet build ${{ inputs.solution-file }} --no-restore --configuration ${{ inputs.build-configuration }}
+
+      #pack the project
+      - name: NuGet pack
+        run: dotnet pack ${{ project-file }} --output ./nupkg -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=${{ inputs.build-configuration }}
+
+      - name: Push packages
+        run: dotnet nuget push ./nupkg/*.nupkg --source github --api-key ${{ secrets.PACKAGE_TOKEN_SECRET }}
