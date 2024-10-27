@@ -6,23 +6,21 @@ on:
       solution-file:
         required: true
         type: string
-        description: "The solution file to build"
       project-file:
         required: true
         type: string
-        description: "The project file to pack"
       build-configuration:
         required: true
         type: string
-        description: "The build configuration to use"
       dotnet-version:
         required: true
         type: string
-        description: "The version of the .NET SDK to use"
 
     secrets:
-      - GITHUB_TOKEN
-      - PACKAGE_TOKEN_SECRET
+      GITHUB_TOKEN:
+        required: true
+      PACKAGE_TOKEN_SECRET:
+        required: true
 
 env:
   GITHUB_NAMESPACE: ThijmenBrand-LifeManager

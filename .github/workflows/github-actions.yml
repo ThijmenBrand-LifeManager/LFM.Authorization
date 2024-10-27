@@ -22,3 +22,4 @@ jobs:
       project-file: ${{ env.PROJECT_FILE }}
       build-configuration: ${{ env.BUILD_CONFIGURATION }}
       dotnet-version: 8.0.x
+    secrets: inherit
