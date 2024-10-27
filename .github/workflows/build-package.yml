@@ -17,8 +17,6 @@ on:
         type: string
 
     secrets:
-      GITHUB_TOKEN:
-        required: true
       PACKAGE_TOKEN_SECRET:
         required: true
 
