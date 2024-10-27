@@ -1,5 +1,4 @@
 using MassTransit;
-using MassTransit.Serialization;
 using Microsoft.AspNetCore.Http;
 
 namespace LFM.Authorization.Core.Messages;
@@ -15,7 +14,7 @@ public class SendWorkstreamIdFilter<T> : IFilter<SendContext<T>> where T : class
 
     public void Probe(ProbeContext context)
     {
-        context.CreateFilterScope("send-engagement-id-header");
+        context.CreateFilterScope("send-workstream-id-header");
     }
 
     public Task Send(SendContext<T> context, IPipe<SendContext<T>> next)
