@@ -22,7 +22,8 @@ public class PermissionsBuilder(IServiceCollection services)
         var permission = new Permission
         {
             Name = name,
-            Category = category
+            Category = category,
+            Description = "Auto-generated permission"
         };
         context.Permissions.Add(permission);
         context.SaveChanges();
