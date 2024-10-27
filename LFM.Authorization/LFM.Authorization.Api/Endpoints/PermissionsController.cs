@@ -10,17 +10,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace LFM.Authorization.Endpoints;
 
 [ApiController]
-[Route("[controller]")]
+[Route("permissions")]
 public class PermissionsController(ISender sender, PermissionValidator validator) : ControllerBase
 {
-    [HttpGet(Name = "ListPermissions")]
+    [HttpGet]
+    [LfmAuthorize]
     public async Task<IResult> ListPermissions()
     {
         var permissions = await sender.Send(new ListPermissionsQuery());
         return Results.Ok(permissions);
     }
     
-    [HttpPost(Name = "CreatePermission")]
+    [HttpPost]
+    [LfmAuthorize]
     public async Task<IResult> CreatePermission([FromBody] CreatePermissionDto command)
     {
         ValidateDto(command);
