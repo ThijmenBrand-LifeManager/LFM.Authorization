@@ -5,18 +5,20 @@ using MediatR;
 
 namespace LFM.Authorization.Application.Commands;
 
-public record AddPermissionToRoleCommand(string Name, string Scope, string PermissionName) : IRequest<LfmRole>;
+public record AddPermissionToRoleCommand(string RoleName, string RoleScope, string PermissionName) : IRequest<LfmRole>;
 
 public class AddPermissionToRoleCommandHandler(IRoleRepository roleRepository, IPermissionRepository permissionRepository) : IRequestHandler<AddPermissionToRoleCommand, LfmRole>
 {
     public async Task<LfmRole> Handle(AddPermissionToRoleCommand request, CancellationToken cancellationToken)
     {
-        var role = await roleRepository.GetByNameAndScopeAsync(request.Name, request.Scope, cancellationToken) 
+        var role = await roleRepository.GetByNameAndScopeAsync(request.RoleName, request.RoleScope, cancellationToken) 
                    ?? throw new Exception("Role not found!");
         var permission = await permissionRepository.GetByIdAsync(request.PermissionName, cancellationToken) 
                          ?? throw new Exception("Permission not found!");
         
-        role.Permissions.Add(permission);
+        if (role.Permissions.All(p => p.Name != request.PermissionName))
+            role.Permissions.Add(permission);
+        
         await roleRepository.UpdateAsync(cancellationToken);
 
         return role;

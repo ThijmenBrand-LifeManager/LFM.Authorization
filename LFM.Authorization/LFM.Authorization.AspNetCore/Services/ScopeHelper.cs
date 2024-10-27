@@ -20,10 +20,10 @@ public static partial class ScopeHelper
     }
     
     public static string CreateWorkstreamScope(string workstreamId) =>
-        $"{ScopeMaskWorkStream.Replace(ScopeVariableStart, string.Empty).Replace(ScopeVariableEnd, string.Empty)}{workstreamId}";
+        $"{ScopeMaskWorkStream.Replace(ScopeVariableStart + "workstreamId" + ScopeVariableEnd, workstreamId)}";
     
-    public static string CreateProjectScope(string workstreamId, string projectId) =>
-        $"{ScopeMaskProject.Replace(ScopeVariableStart, string.Empty).Replace(ScopeVariableEnd, string.Empty)}{workstreamId}{ScopeLevelSeperator}{projectId}";
+    public static string CreateProjectScope(string workstreamId, string projectId) => 
+        $"{CreateWorkstreamScope(workstreamId)}{ScopeMaskProject.Replace(ScopeVariableStart + "projectId" + ScopeVariableEnd, projectId)}";
 
     public static bool IsChildScope(this string scope, string parent)
     {

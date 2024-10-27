@@ -5,7 +5,7 @@ using MediatR;
 
 namespace LFM.Authorization.Application.Commands;
 
-public record CreateRoleCommand(string Name, string Scope, string? Description, bool ignoreIfExists = false) : IRequest<LfmRole>;
+public record CreateRoleCommand(string Name, string Scope, string? Description, bool IgnoreIfExists = false) : IRequest<LfmRole>;
 
 public class CreateRoleCommandHandler(IRoleRepository roleRepository) : IRequestHandler<CreateRoleCommand, LfmRole>
 {
@@ -18,11 +18,6 @@ public class CreateRoleCommandHandler(IRoleRepository roleRepository) : IRequest
             Description = request.Description
         };
         
-        if (request.ignoreIfExists)
-        {
-            return roleRepository.CreateAsync(role, cancellationToken);
-        }
-
-        return roleRepository.CreateAsync(role, cancellationToken);
+        return request.IgnoreIfExists ? roleRepository.CreateIfNotExistsAsync(role, cancellationToken) : roleRepository.CreateAsync(role, cancellationToken);
     }
 }
