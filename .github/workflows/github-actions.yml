@@ -45,13 +45,13 @@ jobs:
 
       #pack the project
       - name: NuGet pack
-        run: dotnet pack "LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj" -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=$BUILD_CONFIGURATION
+        run: dotnet pack "LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj" ./nupkg -p:PackageVersion=${{ steps.set_version.outputs.version }} -p:Configuration=$BUILD_CONFIGURATION
 
       - name: Upload NuGet package to GitHub
         uses: actions/upload-artifact@v4
         with:
           name: nugetPackage
-          path: LFM.Authorization/bin/Release/
+          path: ./nupkg
 
   release:
     runs-on: ubuntu-latest
