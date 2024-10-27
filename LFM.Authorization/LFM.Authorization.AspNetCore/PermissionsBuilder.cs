@@ -27,7 +27,13 @@ public class PermissionsBuilder(IServiceCollection services)
             Category = category,
             Description = "Auto-generated permission"
         };
-        context.Permissions.Add(permission);
+        var exists = context.Permissions.Any(p => p.Name == permission.Name);
+        
+        if (!exists)
+        {
+            context.Permissions.Add(permission);
+        }
+
         context.SaveChanges();
 
         return this;
