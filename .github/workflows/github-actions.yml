@@ -33,7 +33,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore NuGet packages
-        run: dotnet restore "**/*.sln" add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+        run: dotnet restore "LFM.Authorization/LFM.Authorization.sln" add source https://nuget.pkg.github.com/$GITHUB_NAMESPACE/index.json --name github --username $GITHUB_USERNAME --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
       #build the project
       - name: Build the project
