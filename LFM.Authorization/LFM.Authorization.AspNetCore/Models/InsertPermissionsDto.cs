@@ -7,20 +7,20 @@ public class PermissionDto
 }
 public class InsertMultiplePermissionsOnMultipleRolesDto
 {
-    public IEnumerable<PermissionDto> Permissions { get; init; }
-    public IEnumerable<DefaultRoles> Roles { get; init; }
+    public IEnumerable<PermissionDto> Permissions { get; set; } = new List<PermissionDto>();
+    public IEnumerable<DefaultRoles> Roles { get; set; } = new List<DefaultRoles>();
 }
 
 public class InsertMultiplePermissionsOnSingleRoleDto
 {
-    public IEnumerable<PermissionDto> Permissions { get; init; }
-    public DefaultRoles Role { get; init; }
+    public IEnumerable<PermissionDto> Permissions { get; set; } = new List<PermissionDto>();
+    public DefaultRoles Role { get; set; }
 }
 
 public class InsertPermissionOnMultipleRolesDto
 {
-    public PermissionDto Permission { get; init; }
-    public IEnumerable<DefaultRoles> Roles { get; init; }
+    public PermissionDto Permission { get; set; }
+    public IEnumerable<DefaultRoles> Roles { get; set; }
 }
 
 public class InsertPermissionOnSingleRoleDto

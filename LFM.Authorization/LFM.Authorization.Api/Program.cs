@@ -33,6 +33,7 @@ builder.Services.AddIdentity<LfmUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<DatabaseContext>();
 
 builder.Services.AddLfmAuthorization(builder.Configuration);
+
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.RegisterMasstransit(builder.Configuration, enableQueueListener: false);

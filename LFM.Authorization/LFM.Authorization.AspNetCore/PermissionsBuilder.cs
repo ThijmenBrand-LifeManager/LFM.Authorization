@@ -1,13 +1,17 @@
 using LFM.Authorization.AspNetCore.Database;
 using LFM.Authorization.AspNetCore.Models;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace LFM.Authorization.AspNetCore;
 
 public class PermissionsBuilder(IServiceCollection services, AuthorizationDbContext context)
 {
-    public PermissionsBuilder InsertPermissions(InsertMultiplePermissionsOnMultipleRolesDto options)
+    public PermissionsBuilder InsertPermissions(Action<InsertMultiplePermissionsOnMultipleRolesDto> configureOptions)
     {
+        var options = new InsertMultiplePermissionsOnMultipleRolesDto();
+        configureOptions(options);
+        
         foreach (var permission in options.Permissions)
         {
             InsertPermission(permission.Name, permission.Category);
@@ -21,8 +25,11 @@ public class PermissionsBuilder(IServiceCollection services, AuthorizationDbCont
         return this;
     }
 
-    public PermissionsBuilder InsertPermissions(InsertMultiplePermissionsOnSingleRoleDto options)
+    public PermissionsBuilder InsertPermissions(Action<InsertMultiplePermissionsOnSingleRoleDto> configureOptions)
     {
+        var options = new InsertMultiplePermissionsOnSingleRoleDto();
+        configureOptions(options);
+        
         foreach (var permission in options.Permissions)
         {
             InsertPermission(permission.Name, permission.Category);
@@ -33,8 +40,11 @@ public class PermissionsBuilder(IServiceCollection services, AuthorizationDbCont
         return this;
     }
 
-    public PermissionsBuilder InsertPermissions(InsertPermissionOnMultipleRolesDto options)
+    public PermissionsBuilder InsertPermissions(Action<InsertPermissionOnMultipleRolesDto> configureOptions)
     {
+        var options = new InsertPermissionOnMultipleRolesDto();
+        configureOptions(options);
+        
         InsertPermission(options.Permission.Name, options.Permission.Category);
         
         foreach (var role in options.Roles)
@@ -45,8 +55,11 @@ public class PermissionsBuilder(IServiceCollection services, AuthorizationDbCont
         return this;
     }
 
-    public PermissionsBuilder InsertPermissions(InsertPermissionOnSingleRoleDto options)
+    public PermissionsBuilder InsertPermissions(Action<InsertPermissionOnSingleRoleDto> configureOptions)
     {
+        var options = new InsertPermissionOnSingleRoleDto();
+        configureOptions(options);
+        
         InsertPermission(options.Permission.Name, options.Permission.Category);
         
         AddDefaultRolePermissions(options.Role, new[] { options.Permission });
