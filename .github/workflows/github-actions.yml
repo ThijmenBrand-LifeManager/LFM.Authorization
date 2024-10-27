@@ -16,7 +16,7 @@ on:
 
 jobs:
   build-and-publish-package:
-    uses: ./build-package.yml
+    uses: ./.github/workflows/build-package.yml
     with:
       solution-file: ${{ env.SOLUTION_FILE }}
       project-file: ${{ env.PROJECT_FILE }}
