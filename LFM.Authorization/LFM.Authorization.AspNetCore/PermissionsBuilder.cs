@@ -7,25 +7,7 @@ namespace LFM.Authorization.AspNetCore;
 
 public class PermissionsBuilder(IServiceCollection services, AuthorizationDbContext context)
 {
-    public PermissionsBuilder InsertPermissions(Action<InsertMultiplePermissionsOnMultipleRolesDto> configureOptions)
-    {
-        var options = new InsertMultiplePermissionsOnMultipleRolesDto();
-        configureOptions(options);
-        
-        foreach (var permission in options.Permissions)
-        {
-            InsertPermission(permission.Name, permission.Category);
-        }
-
-        foreach (var role in options.Roles)
-        {
-            AddDefaultRolePermissions(role, options.Permissions);
-        }
-
-        return this;
-    }
-
-    public PermissionsBuilder InsertPermissions(Action<InsertMultiplePermissionsOnSingleRoleDto> configureOptions)
+    public PermissionsBuilder InsertPermissionsOnRole(Action<InsertMultiplePermissionsOnSingleRoleDto> configureOptions)
     {
         var options = new InsertMultiplePermissionsOnSingleRoleDto();
         configureOptions(options);
@@ -40,22 +22,7 @@ public class PermissionsBuilder(IServiceCollection services, AuthorizationDbCont
         return this;
     }
 
-    public PermissionsBuilder InsertPermissions(Action<InsertPermissionOnMultipleRolesDto> configureOptions)
-    {
-        var options = new InsertPermissionOnMultipleRolesDto();
-        configureOptions(options);
-        
-        InsertPermission(options.Permission.Name, options.Permission.Category);
-        
-        foreach (var role in options.Roles)
-        {
-            AddDefaultRolePermissions(role, new[] { options.Permission });
-        }
-
-        return this;
-    }
-
-    public PermissionsBuilder InsertPermissions(Action<InsertPermissionOnSingleRoleDto> configureOptions)
+    public PermissionsBuilder InsertPermissionOnRole(Action<InsertPermissionOnSingleRoleDto> configureOptions)
     {
         var options = new InsertPermissionOnSingleRoleDto();
         configureOptions(options);

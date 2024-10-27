@@ -19,4 +19,10 @@ public class DefaultRoles
     public static DefaultRoles ProjectUser => new DefaultRoles("ProjectUser");
     
     public override string ToString() => Value;
+
+    public static bool IsValidRole(string role)
+    {
+        return typeof(DefaultRoles).GetProperties(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public)
+            .Any(prop => prop.GetValue(null)?.ToString() == role);
+    }
 }
