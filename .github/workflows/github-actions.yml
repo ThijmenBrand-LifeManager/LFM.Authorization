@@ -28,7 +28,7 @@ on:
       - release
 
 jobs:
-  build-and-publish-package:
+  build:
     if: inputs.publish-package == true || github.event_name == 'push' || github.event_name == 'pull_request'
     name: Build and publish packages
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-package.yml@main
@@ -39,7 +39,7 @@ jobs:
       dotnet-version: 8.0.x
     secrets: inherit
 
-  build-and-test:
+  test:
     if: github.event_name == 'pull_request' && (github.base_ref == 'develop' || github.base_ref == 'release')
     name: Build and test application
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-and-test.yml@main
@@ -51,7 +51,6 @@ jobs:
 
   deploy-image:
     if: inputs.release == true || github.event_name == 'push'
-    needs: [build-and-publish-package, build-and-test]
     name: Deploy to Env
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
     with:
