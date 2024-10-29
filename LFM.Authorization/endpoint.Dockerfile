@@ -5,11 +5,11 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ./LFM.Authorization/LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
-COPY ./LFM.Authorization/LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
-COPY ./LFM.Authorization/LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
-COPY ./LFM.Authorization/LFM.Authorization.AspNetCore/*.csproj ./LFM.Authorization.AspNetCore/
-COPY ./LFM.Authorization/LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
+COPY ./LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
+COPY ./LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
+COPY ./LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
+COPY ./LFM.Authorization.AspNetCore/*.csproj ./LFM.Authorization.AspNetCore/
+COPY ./LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
 
 ARG NUGET_PAT=""
 ARG NUGET_USER=""
