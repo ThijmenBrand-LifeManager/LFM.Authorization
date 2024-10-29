@@ -38,5 +38,5 @@ jobs:
     with:
       environment: develop
       dockerfile-path: |-
-        testfile1
-        testfile2
+        LFM.Authorization/api.Dockerfile
+        LFM.Authorization.endpoint.Dockerfile
