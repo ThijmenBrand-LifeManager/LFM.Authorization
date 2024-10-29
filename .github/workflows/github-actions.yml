@@ -29,7 +29,7 @@ on:
 
 jobs:
   build:
-    if: inputs.publish-package == true || github.event_name == 'push' || github.event_name == 'pull_request'
+    if: inputs.publish-package == true || inputs.release == true || github.event_name == 'push' || github.event_name == 'pull_request'
     name: Build and publish packages
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-package.yml@main
     with:
