@@ -12,16 +12,11 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
-{
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
 
 var enableSwagger = builder.Configuration.GetValue<bool>("OpenApi:ShowDocument");
 if (enableSwagger)
 {
-    builder.Services.AddSwagger();
+    builder.Services.AddSwagger(builder.Configuration);
 }
 
 builder.Services.AddCoreModule(builder.Configuration);
@@ -61,8 +56,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (enableSwagger)
-{    
-    app.UseForwardedHeaders();
+{
     app.UseSwagger().UseAuthentication();
     app.UseSwaggerUI();
     
