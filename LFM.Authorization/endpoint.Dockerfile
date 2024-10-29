@@ -14,7 +14,7 @@ COPY ./LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
 ARG NUGET_PAT=""
 ARG NUGET_USER=""
 
-RUN dotnet nuget add source --username "$NUGET_USER" --password "$NUGET_PAT" --name "github" "https://nuget.pkg.github.com/ThijmenBrand-LifeManager/index.json"
+RUN dotnet nuget add source --username "$NUGET_USER" --password "$NUGET_PAT" --store-password-in-clear-text --name "github" "https://nuget.pkg.github.com/ThijmenBrand-LifeManager/index.json"
 RUN dotnet restore LFM.Authorization.Endpoint/LFM.Authorization.Endpoint.csproj
 
 COPY . .
