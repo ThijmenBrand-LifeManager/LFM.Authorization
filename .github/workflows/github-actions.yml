@@ -50,10 +50,10 @@ jobs:
       build-configuration: Release
     secrets: inherit
 
-  deploy-image:
+  automatic-deploy:
     needs: [build, test]
     if: inputs.release == false && github.event_name == 'push'
-    name: Deploy to Env
+    name: Automatic deploy to Env
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
     with:
       environment: develop
@@ -63,10 +63,10 @@ jobs:
         endpoint.Dockerfile
     secrets: inherit
 
-  deploy-imagea:
+  manual-deploy:
     needs: [build]
     if: inputs.release == true
-    name: Deploy to Env
+    name: Manual deploy to env
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
     with:
       environment: develop
