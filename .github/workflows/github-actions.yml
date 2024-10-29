@@ -40,3 +40,4 @@ jobs:
       dockerfile-path: |-
         LFM.Authorization/api.Dockerfile
         LFM.Authorization/endpoint.Dockerfile
+    secrets: inherit
