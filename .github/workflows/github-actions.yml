@@ -51,6 +51,7 @@ jobs:
     secrets: inherit
 
   deploy-image:
+    needs: [build, test]
     if: inputs.release == true || github.event_name == 'push'
     name: Deploy to Env
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
