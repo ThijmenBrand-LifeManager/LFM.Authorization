@@ -19,7 +19,7 @@ RUN dotnet restore LFM.Authorization.Endpoint/LFM.Authorization.Endpoint.csproj
 COPY . .
 
 WORKDIR "/app/LFM.Authorization.Endpoint"
-RUN dotnet build "LFM.Authorization.Api.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
+RUN dotnet build "LFM.Authorization.Endpoint.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
