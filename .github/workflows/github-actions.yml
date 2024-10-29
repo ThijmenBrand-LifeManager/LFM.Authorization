@@ -15,24 +15,25 @@ on:
       - release
 
 jobs:
-  # build-and-publish-package:
-  #   uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-package.yml@main
-  #   with:
-  #     solution-file: LFM.Authorization/LFM.Authorization.sln
-  #     project-file: LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
-  #     build-configuration: Release
-  #     dotnet-version: 8.0.x
-  #   secrets: inherit
+  build-and-publish-package:
+    uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-package.yml@main
+    with:
+      solution-file: LFM.Authorization/LFM.Authorization.sln
+      project-file: LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
+      build-configuration: Release
+      dotnet-version: 8.0.x
+    secrets: inherit
 
-  # build-and-test:
-  #   uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-and-test.yml@main
-  #   with:
-  #     dotnet-version: 8.0.x
-  #     solution-file: LFM.Authorization/LFM.Authorization.sln
-  #     build-configuration: Release
-  #   secrets: inherit
+  build-and-test:
+    uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-and-test.yml@main
+    with:
+      dotnet-version: 8.0.x
+      solution-file: LFM.Authorization/LFM.Authorization.sln
+      build-configuration: Release
+    secrets: inherit
 
   deploy-image:
+    needs: [build-and-publish-package, build-and-test]
     name: Deploy to Env
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
     with:
