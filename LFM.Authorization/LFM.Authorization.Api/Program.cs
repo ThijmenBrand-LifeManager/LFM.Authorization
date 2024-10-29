@@ -6,11 +6,17 @@ using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
 
 var enableSwagger = builder.Configuration.GetValue<bool>("OpenApi:ShowDocument");
 if (enableSwagger)
@@ -55,7 +61,8 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (enableSwagger)
-{
+{    
+    app.UseForwardedHeaders();
     app.UseSwagger().UseAuthentication();
     app.UseSwaggerUI();
     
