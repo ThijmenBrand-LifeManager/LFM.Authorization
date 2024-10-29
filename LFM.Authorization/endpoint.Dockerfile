@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
 COPY ./LFM.Authorization/LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
 COPY ./LFM.Authorization/LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
@@ -16,7 +16,7 @@ ARG NUGET_USER=""
 RUN dotnet nuget add source --username "$NUGET_USER" --password "$NUGET_PAT" --name "github" "https://nuget.pkg.github.com/ThijmenBrand-LifeManager/index.json"
 RUN dotnet restore LFM.Authorization.Endpoint/LFM.Authorization.Endpoint.csproj
 
-WORKDIR "/app/LFM.Authorization.Endpoint"
+WORKDIR "/src/LFM.Authorization.Endpoint"
 
 COPY . .
 RUN dotnet build "LFM.Authorization.Endpoint.csproj" -c Release -o /app/build
