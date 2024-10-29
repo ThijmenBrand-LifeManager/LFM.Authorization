@@ -37,7 +37,8 @@ jobs:
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/build-docker-image.yml@main
     with:
       environment: develop
+      project-path: LFM.Authorization
       dockerfile-path: |-
-        LFM.Authorization/api.Dockerfile
-        LFM.Authorization/endpoint.Dockerfile
+        api.Dockerfile
+        endpoint.Dockerfile
     secrets: inherit
