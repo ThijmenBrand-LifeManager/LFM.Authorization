@@ -16,9 +16,9 @@ ARG NUGET_USER=""
 RUN dotnet nuget add source --username "$NUGET_USER" --password "$NUGET_PAT" --name "github" "https://nuget.pkg.github.com/ThijmenBrand-LifeManager/index.json"
 RUN dotnet restore LFM.Authorization.Endpoint/LFM.Authorization.Endpoint.csproj
 
-WORKDIR "/src/LFM.Authorization.Endpoint"
-
 COPY . .
+
+WORKDIR "/src/LFM.Authorization.Endpoint"
 RUN dotnet build "LFM.Authorization.Endpoint.csproj" -c Release -o /app/build
 
 FROM build AS publish
