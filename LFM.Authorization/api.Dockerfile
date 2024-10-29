@@ -8,9 +8,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /app
 
-COPY ./LFM.Authorization.Api/*.csproj ./LFM.Authorization.Api/
-COPY ./LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
-COPY ./LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
+COPY ./LFM.Authorization/LFM.Authorization.Api/*.csproj ./LFM.Authorization.Api/
+COPY ./LFM.Authorization/LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
+COPY ./LFM.Authorization/LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
 
 ARG NUGET_PAT=""
 ARG NUGET_USER=""

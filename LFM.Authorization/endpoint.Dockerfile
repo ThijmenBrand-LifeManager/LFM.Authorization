@@ -5,10 +5,10 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /app
 
-COPY ./LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
-COPY ./LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
-COPY ./LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
-COPY ./LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
+COPY ./LFM.Authorization/LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
+COPY ./LFM.Authorization/LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
+COPY ./LFM.Authorization/LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
+COPY ./LFM.Authorization/LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
 
 ARG NUGET_PAT=""
 ARG NUGET_USER=""
