@@ -8,6 +8,7 @@ WORKDIR /app
 COPY ./LFM.Authorization/LFM.Authorization.Endpoint/*.csproj ./LFM.Authorization.Endpoint/
 COPY ./LFM.Authorization/LFM.Authorization.Application/*.csproj ./LFM.Authorization.Application/
 COPY ./LFM.Authorization/LFM.Authorization.Repository/*.csproj ./LFM.Authorization.Repository/
+COPY ./LFM.Authorization.LFM.Authorization.AspNetCore/*.csproj ./LFM.Authorization.AspNetCore/
 COPY ./LFM.Authorization/LFM.Authorization.Core/*.csproj ./LFM.Authorization.Core/
 
 ARG NUGET_PAT=""
