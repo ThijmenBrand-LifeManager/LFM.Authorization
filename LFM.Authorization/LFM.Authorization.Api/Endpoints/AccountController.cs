@@ -45,16 +45,28 @@ public class AccountController(
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
         
-        var user = new LfmUser
+        var newUser = new LfmUser
         {
             Email = model.Email,
             UserName = model.Username,
         };
         
-        var result = await userManager.CreateAsync(user, model.Password);
+        var result = await userManager.CreateAsync(newUser, model.Password);
         if (!result.Succeeded) return BadRequest(result.Errors);
+
+        var user = await userManager.FindByEmailAsync(newUser.Email);
+        if (user == null) return Unauthorized();
         
-        return Ok();
+        var token = tokenService.CreateToken(user);
+        var authentication = new AuthenticationDto()
+        {
+            Id = user.Id,
+            Username = user.UserName,
+            Email = user.Email!,
+            Token = token,
+        };
+        
+        return Ok(authentication);
     }
     
 }
