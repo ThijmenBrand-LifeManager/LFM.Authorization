@@ -11,7 +11,7 @@ public static class RepositoryModule
     public static IServiceCollection AddRepositoryModule(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<DatabaseContext>(options =>
-            options.UseNpgsql(configuration.GetSection("Postgres").GetValue<string>("ConnectionString")));
+            options.UseNpgsql($"Host=localhost;Port=5432;Database=lfm_authorization;Username={configuration["database:userId"]};Password={configuration["database:password"]}"));
 
         services.AddTransient<IPermissionRepository, PermissionRepository>();
         services.AddTransient<IRoleRepository, RoleRepository>();

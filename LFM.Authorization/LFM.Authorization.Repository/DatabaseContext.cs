@@ -15,7 +15,5 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : Identi
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.HasDefaultSchema("identity");
     }
 }

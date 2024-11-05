@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace LFM.Authorization.AspNetCore;
 
-public class PermissionsBuilder(IServiceCollection services, AuthorizationDbContext context)
+public class PermissionsBuilder(AuthorizationDbContext context)
 {
     public PermissionsBuilder InsertPermissionsOnRole(Action<InsertMultiplePermissionsOnSingleRoleDto> configureOptions)
     {

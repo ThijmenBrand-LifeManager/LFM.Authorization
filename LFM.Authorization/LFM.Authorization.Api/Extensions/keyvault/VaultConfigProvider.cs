@@ -15,7 +15,7 @@ public class VaultConfigurationProvider : ConfigurationProvider
     {
         _config = config;
         _client = new VaultClient(
-            new VaultClientSettings(_config.Address, new AppRoleAuthMethodInfo(_config.Role, _config.Secret))
+            new VaultClientSettings(_config.Address, new AppRoleAuthMethodInfo(_config.AppRoleId, _config.AppSecretId))
         );
     }
 
@@ -35,7 +35,7 @@ public class VaultConfigurationProvider : ConfigurationProvider
         var password = "";
 
         Secret<UsernamePasswordCredentials> dynamicDatabaseCredentials =
-            await _client.V1.Secrets.Database.GetCredentialsAsync(_config.Role);
+            await _client.V1.Secrets.Database.GetCredentialsAsync(_config.DatabaseRole);
 
         userId = dynamicDatabaseCredentials.Data.Username;
         password = dynamicDatabaseCredentials.Data.Password;

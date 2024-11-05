@@ -50,7 +50,7 @@ public static class AspNetCoreModule
         var scope = services.BuildServiceProvider().CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<AuthorizationDbContext>();
 
-        return new PermissionsBuilder(services, context);
+        return new PermissionsBuilder(context);
     }
 
 }

@@ -6,7 +6,7 @@ using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
-using Microsoft.AspNetCore.HttpOverrides;
+using LFM.Common.KeyVault;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +18,16 @@ if (enableSwagger)
 {
     builder.Services.AddSwagger(builder.Configuration);
 }
+
+builder.Configuration.AddEnvironmentVariables(prefix: "LFM_").Build();
+
+builder.Configuration.AddLfmKeyVault(x =>
+{
+    x.Address = builder.Configuration["Vault:Address"] ?? throw new InvalidOperationException();
+    x.AppRoleId = builder.Configuration["Vault:AppRoleId"] ?? throw new InvalidOperationException();
+    x.AppSecretId = builder.Configuration["Vault:AppSecretId"] ?? throw new InvalidOperationException();
+    x.DatabaseRole = builder.Configuration["Vault:DatabaseRole"] ?? throw new InvalidOperationException();
+});
 
 builder.Services.AddCoreModule(builder.Configuration);
 builder.Services.AddRepositoryModule(builder.Configuration);
