@@ -28,6 +28,7 @@ jobs:
     name: A test
     uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/main.yml@main
     with:
+      project-path: LFM.Authorization
       solution-file: LFM.Authorization/LFM.Authorization.sln
       package-path: |-
         LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
