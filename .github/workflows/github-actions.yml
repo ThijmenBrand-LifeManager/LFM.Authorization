@@ -32,6 +32,14 @@ on:
       - release
 
 jobs:
+  main:
+    name: A test
+    uses: ThijmenBrand-LifeManager/LFM.Pipelines/.github/workflows/main.yml@main
+    with:
+      solution-file: LFM.Authorization/LFM.Authorization.sln
+      package-path: |-
+        LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
+
   build:
     if: inputs.publish-package == true || inputs.release == true || github.event_name == 'push' || github.event_name == 'pull_request'
     name: Build and publish packages
@@ -52,6 +60,7 @@ jobs:
       dotnet-version: 8.0.x
       solution-file: LFM.Authorization/LFM.Authorization.sln
       build-configuration: Release
+      app-name: Authorization
     secrets: inherit
 
   automatic-deploy:
