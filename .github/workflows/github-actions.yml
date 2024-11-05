@@ -22,6 +22,8 @@ on:
     branches:
       - develop
       - release
+  release:
+    types: [published]
 
 jobs:
   main:
