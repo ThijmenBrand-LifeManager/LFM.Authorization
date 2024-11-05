@@ -10,16 +10,8 @@ env:
 on:
   workflow_dispatch:
     inputs:
-      publish-package:
-        description: "Publish package"
-        default: false
-        type: boolean
-      release:
-        description: "Release app"
-        default: false
-        type: boolean
-      test-application:
-        description: "Test application"
+      release-dev:
+        description: "Release app to D"
         default: false
         type: boolean
   pull_request:
@@ -39,7 +31,7 @@ jobs:
       solution-file: LFM.Authorization/LFM.Authorization.sln
       package-path: |-
         LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
-      force-release-dev: ${{ inputs.release || false }}
+      force-release-dev: ${{ inputs.release-dev || false }}
       app-name: LFM.Authorization
     secrets: inherit
 
