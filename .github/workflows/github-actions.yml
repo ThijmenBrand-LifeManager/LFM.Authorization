@@ -31,6 +31,9 @@ jobs:
       solution-file: LFM.Authorization/LFM.Authorization.sln
       package-path: |-
         LFM.Authorization/LFM.Authorization.AspNetCore/LFM.Authorization.AspNetCore.csproj
+      dockerfile-path: |-
+        api.Dockerfile
+        endpoint.Dockerfile
       force-release-dev: ${{ inputs.release-dev || false }}
       app-name: LFM.Authorization
     secrets: inherit
