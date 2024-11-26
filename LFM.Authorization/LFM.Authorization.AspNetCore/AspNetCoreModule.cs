@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 
 namespace LFM.Authorization.AspNetCore;
 
@@ -16,8 +17,18 @@ public static class AspNetCoreModule
     public static PermissionsBuilder AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<JWT>(configuration.GetSection("Jwt"));
+        var connectionString = new NpgsqlConnectionStringBuilder
+        {
+            Host = "lfm-pgsql-db-dev.postgres.database.azure.com",
+            Port = 5432,
+            Database = "lfm-authorization",
+            Username = "lfm_authorization_service",
+            SslMode = SslMode.Require,
+            Password = configuration["Database:Password"]
+        }.ToString();
+        
         services.AddDbContext<AuthorizationDbContext>(options =>
-            options.UseNpgsql(configuration.GetSection("Authorization").GetValue<string>("ConnectionString")));
+            options.UseNpgsql(connectionString));
         
         services.AddTransient<IValidatePermissions, ValidatePermissions>();
         

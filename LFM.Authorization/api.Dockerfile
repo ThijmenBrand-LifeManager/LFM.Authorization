@@ -2,8 +2,6 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
-ENV ASPNETCORE_URLS=http://+:80
-
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /app
@@ -32,5 +30,8 @@ RUN dotnet publish "LFM.Authorization.Api.csproj" -c "$BUILD_CONFIGURATION" -o /
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+ENV ASPNETCORE_HTTP_PORTS "80"
+ENV ASPNETCORE_URLS "http://*:80"
 
 ENTRYPOINT ["dotnet", "LFM.Authorization.Api.dll"]

@@ -1,3 +1,5 @@
+using Azure.Core;
+using Azure.Identity;
 using FluentValidation;
 using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;

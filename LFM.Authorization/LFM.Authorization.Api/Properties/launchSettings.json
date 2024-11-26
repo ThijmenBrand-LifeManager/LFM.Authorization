@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "local dev": {
+    "Local Dev": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -17,10 +17,10 @@
       "applicationUrl": "https://localhost:7146;http://localhost:5092",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "APPSETTINGS_FILEPATH": "appsettings.Development.json"
+        "APPSETTINGS_FILEPATH": "appsettings.local.json"
       }
     },
-    "azure dev": {
+    "Azure Dev": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
@@ -28,15 +28,15 @@
       "applicationUrl": "https://localhost:7146;http://localhost:5092",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "APPSETTINGS_FILEPATH": "appsettings.json"
+        "APPSETTINGS_FILEPATH": "appsettings.azure.json"
       }
     },
     "Build": {
       "commandName": "Project",
       "applicationUrl": "https://localhost:7180;http://localhost:5080",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Build",
-        "APPSETTINGS_FILEPATH": "appsettings.Build.json"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "APPSETTINGS_FILEPATH": "appsettings.json"
       }
     }
   }
