@@ -16,12 +16,12 @@ public static class RepositoryModule
     {
         var connectionString = new NpgsqlConnectionStringBuilder
         {
-            Host = "lfm-pgsql-db-dev.postgres.database.azure.com",
+            Host = "lfm-dev-pgsql-db.postgres.database.azure.com",
             Port = 5432,
             Database = "lfm-authorization",
             Username = "lfm_authorization_service",
             SslMode = SslMode.Require,
-            Password = configuration["Database:Password"]
+            Password = configuration.GetSection("Database").GetValue<string>("Password")
         }.ToString();
         
         services.AddDbContext<DatabaseContext>(options =>
