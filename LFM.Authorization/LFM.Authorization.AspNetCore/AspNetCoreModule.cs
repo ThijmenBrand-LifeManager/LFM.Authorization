@@ -1,7 +1,6 @@
 using System.Text;
 using LFM.Authorization.AspNetCore.Database;
 using LFM.Authorization.AspNetCore.Services;
-using LFM.Authorization.Core.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +15,15 @@ public static class AspNetCoreModule
 {
     public static PermissionsBuilder AddLfmAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<JWT>(configuration.GetSection("Jwt"));
+        var databaseConfiguration = configuration.GetSection("AuthorizationDatabase");
         var connectionString = new NpgsqlConnectionStringBuilder
         {
-            Host = "lfm-pgsql-db-dev.postgres.database.azure.com",
-            Port = 5432,
-            Database = "lfm-authorization",
-            Username = "lfm_authorization_service",
+            Host = databaseConfiguration.GetValue<string>("Host"),
+            Port = databaseConfiguration.GetValue<int>("Port"),
+            Database = databaseConfiguration.GetValue<string>("Database"),
+            Username = databaseConfiguration.GetValue<string>("Username"),
             SslMode = SslMode.Require,
-            Password = configuration["Database:Password"]
+            Password = configuration.GetSection("Database").GetValue<string>("Password")
         }.ToString();
         
         services.AddDbContext<AuthorizationDbContext>(options =>

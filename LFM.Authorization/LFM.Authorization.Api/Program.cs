@@ -1,5 +1,3 @@
-using Azure.Core;
-using Azure.Identity;
 using FluentValidation;
 using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;
@@ -8,7 +6,6 @@ using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
-using LFM.Common.KeyVault;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);

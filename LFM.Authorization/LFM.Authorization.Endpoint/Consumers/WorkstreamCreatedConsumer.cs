@@ -1,9 +1,7 @@
 using LFM.Authorization.Application.Commands;
 using LFM.Authorization.Application.Queries;
 using LFM.Authorization.AspNetCore;
-using LFM.Authorization.AspNetCore.Models;
 using LFM.Authorization.AspNetCore.Services;
-using LFM.Authorization.Endpoint.Models;
 using LFM.WorkStream.Core.Messages.Events;
 using MassTransit;
 using MediatR;
@@ -29,6 +27,5 @@ public class WorkstreamCreatedConsumer(ISender sender) : IConsumer<WorkstreamCre
         var userId = context.Message.CreatorId;
         var roleAssignment =
             await sender.Send(new CreateRoleAssignmentCommand(userId, DefaultRoles.ProjectAdmin.ToString(), roleScope));
-
     }
 }

@@ -1,11 +1,8 @@
-using Azure.Core;
-using Azure.Identity;
 using LFM.Authorization.Repository.Interfaces;
 using LFM.Authorization.Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Identity.Client.AppConfig;
 using Npgsql;
 
 namespace LFM.Authorization.Repository;
@@ -14,12 +11,13 @@ public static class RepositoryModule
 {
     public static IServiceCollection AddRepositoryModule(this IServiceCollection services, IConfiguration configuration)
     {
+        var databaseConfiguration = configuration.GetSection("Database");
         var connectionString = new NpgsqlConnectionStringBuilder
         {
-            Host = "lfm-dev-pgsql-db.postgres.database.azure.com",
-            Port = 5432,
-            Database = "lfm-authorization",
-            Username = "lfm_authorization_service",
+            Host = databaseConfiguration.GetValue<string>("Host"),
+            Port = databaseConfiguration.GetValue<int>("Port"),
+            Database = databaseConfiguration.GetValue<string>("Database"),
+            Username = databaseConfiguration.GetValue<string>("Username"),
             SslMode = SslMode.Require,
             Password = configuration.GetSection("Database").GetValue<string>("Password")
         }.ToString();
