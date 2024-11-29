@@ -1,3 +1,4 @@
+using Azure.Core;
 using FluentValidation;
 using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;
@@ -6,9 +7,13 @@ using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
+using LFM.Azure.Common.Authentication;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var userManagedIdentityClientId = Environment.GetEnvironmentVariable("Identity__ClientId");
+var tokenCredential = AzureCredentialFactory.GetCredential(userManagedIdentityClientId);
+builder.Services.AddSingleton<TokenCredential>(tokenCredential);
 
 builder.Services.AddEndpointsApiExplorer();
 
