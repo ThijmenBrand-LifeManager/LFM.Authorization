@@ -609,3 +609,5 @@ fabric.properties
 /LFM.Authorization.Repository/bin/
 /LFM.Authorization.Repository/obj/
 /LFM.Authorization.Repository/Migrations/
+
+*/appsettings.development.json
