@@ -28,4 +28,6 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
+ENV Environment="Production"
+
 ENTRYPOINT ["dotnet", "LFM.Authorization.Endpoint.dll"]

@@ -33,5 +33,6 @@ COPY --from=publish /app/publish .
 
 ENV ASPNETCORE_HTTP_PORTS="80"
 ENV ASPNETCORE_URLS="http://*:80"
+ENV Environment="Production"
 
 ENTRYPOINT ["dotnet", "LFM.Authorization.Api.dll"]
