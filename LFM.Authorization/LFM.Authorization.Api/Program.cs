@@ -23,6 +23,8 @@ if (enableSwagger)
     builder.Services.AddSwagger(builder.Configuration);
 }
 
+builder.Services.RegisterOpenTelementry(builder.Configuration, builder.Environment.ApplicationName);
+
 builder.Services.AddCoreModule(builder.Configuration);
 builder.Services.AddRepositoryModule(builder.Configuration);
 builder.Services.AddApplicationModule(builder.Configuration);
@@ -70,6 +72,7 @@ if (enableSwagger)
 app.UseHttpsRedirection();
 
 app.MapControllers();
+app.MapPrometheusScrapingEndpoint();
 
 app.UseCors(CorsDevelopmentPolicy);
 
