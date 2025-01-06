@@ -25,7 +25,7 @@ public static class MassTransitExtension
             {
                 x.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("localhost", "/", h =>
+                    cfg.Host(configuration["ServiceBus:Host"] ?? throw new NullReferenceException("ServiceBus:Host not defined"), "/", h =>
                     {
                         h.Username("guest");
                         h.Password("guest");

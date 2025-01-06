@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using LFM.Authorization.Application;
+using LFM.Authorization.Core.Extensions;
 using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Repository;
 using LFM.Azure.Common.Authentication;
@@ -21,16 +22,16 @@ if (!string.IsNullOrWhiteSpace(appSettingsFilePath))
 
 builder.Services.AddApplicationModule(builder.Configuration);
 builder.Services.AddRepositoryModule(builder.Configuration);
+
+builder.Services.RegisterOpenTelementry(builder.Configuration, builder.Environment.ApplicationName);
+builder.Services.RegisterSerilog(builder.Configuration, builder.Environment.ApplicationName);
     
 builder.Services.RegisterMasstransit(builder.Configuration, true);
-
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .WriteTo.Console(new RenderedCompactJsonFormatter())
-    .CreateLogger();
 
 builder.Host.UseSerilog();
 
 var app = builder.Build();
+
+app.MapPrometheusScrapingEndpoint();
 
 app.Run();

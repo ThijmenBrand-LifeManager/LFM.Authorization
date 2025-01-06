@@ -4,6 +4,7 @@ using LFM.Authorization.Endpoints.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace LFM.Authorization.Endpoints;
 
@@ -12,7 +13,8 @@ namespace LFM.Authorization.Endpoints;
 public class AccountController(
     UserManager<LfmUser> userManager,
     ITokenService tokenService,
-    SignInManager<LfmUser> signInManager)
+    SignInManager<LfmUser> signInManager,
+    ILogger<AccountController> logger)
     : ControllerBase
 {
     [HttpPost("login")]
@@ -35,6 +37,8 @@ public class AccountController(
             Email = user.Email!,
             Token = token,
         };
+        
+        Log.Information("User {Username} logged in from {Ip}", user.UserName, HttpContext.Connection.RemoteIpAddress);
         
         return Ok(authentication);
     }

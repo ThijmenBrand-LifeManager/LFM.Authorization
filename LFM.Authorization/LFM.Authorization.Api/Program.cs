@@ -3,12 +3,14 @@ using FluentValidation;
 using LFM.Authorization.Application;
 using LFM.Authorization.AspNetCore;
 using LFM.Authorization.Core;
+using LFM.Authorization.Core.Extensions;
 using LFM.Authorization.Core.Messages;
 using LFM.Authorization.Core.Models;
 using LFM.Authorization.Extensions;
 using LFM.Authorization.Repository;
 using LFM.Azure.Common.Authentication;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 var userManagedIdentityClientId = Environment.GetEnvironmentVariable("Identity__ClientId");
@@ -24,6 +26,7 @@ if (enableSwagger)
 }
 
 builder.Services.RegisterOpenTelementry(builder.Configuration, builder.Environment.ApplicationName);
+builder.Services.RegisterSerilog(builder.Configuration, builder.Environment.ApplicationName);
 
 builder.Services.AddCoreModule(builder.Configuration);
 builder.Services.AddRepositoryModule(builder.Configuration);
@@ -70,6 +73,7 @@ if (enableSwagger)
 }
 
 app.UseHttpsRedirection();
+app.UseSerilogRequestLogging();
 
 app.MapControllers();
 app.MapPrometheusScrapingEndpoint();
