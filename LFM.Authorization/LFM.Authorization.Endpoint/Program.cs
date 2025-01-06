@@ -2,6 +2,7 @@
 using LFM.Authorization.Application;
 using LFM.Authorization.Core.Extensions;
 using LFM.Authorization.Core.Messages;
+using LFM.Authorization.Endpoint.Extensions;
 using LFM.Authorization.Repository;
 using LFM.Azure.Common.Authentication;
 using Microsoft.AspNetCore.Builder;

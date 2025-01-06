@@ -1,12 +1,11 @@
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
-namespace LFM.Authorization.Core.Extensions;
+namespace LFM.Authorization.Extensions;
 
 public static class OpenTelemetry
 {
@@ -36,10 +35,22 @@ public static class OpenTelemetry
             }
         });
 
-    otel.WithTracing(tracing =>
+        otel.WithTracing(tracing =>
         {
-            tracing.AddAspNetCoreInstrumentation();
-            tracing.AddHttpClientInstrumentation();
+            tracing.AddAspNetCoreInstrumentation(options =>
+            {
+                options.Filter = httpContext => !httpContext.Request.Path.Equals("/metrics") &&
+                                                !httpContext.Request.Path.Equals("/health");
+            });
+            tracing.AddHttpClientInstrumentation(options =>
+            {
+                options.FilterHttpRequestMessage = (request) => !request.RequestUri!.Host.Equals("lfm_loki");
+            });
+            tracing.AddEntityFrameworkCoreInstrumentation(options =>
+            {
+                options.SetDbStatementForText = true;
+                options.SetDbStatementForStoredProcedure = true;
+            });
             if (tracingOtpEndpoint != null)
             {
                 tracing.AddOtlpExporter(oltpOptions =>
@@ -49,7 +60,7 @@ public static class OpenTelemetry
                     oltpOptions.Protocol = OtlpExportProtocol.Grpc;
                 });
             }
-            else 
+            else
             {
                 tracing.AddConsoleExporter();
             }
