@@ -25,6 +25,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  actions: read
+
 jobs:
   main:
     name: A test
